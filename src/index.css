@@ -10,3 +10,14 @@
   --neutral-dark: hsl(from var(--neutral) h s calc(l*0.45));
   --neutral-light: hsl(from var(--neutral) h s calc(l*1.15));
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--primary-dark);
+  background: linear-gradient(var(--primary-dark) -20svh, var(--primary-light) 33svh, var(--primary-dark));
+}
