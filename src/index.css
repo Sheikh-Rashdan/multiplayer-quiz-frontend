@@ -1,0 +1,12 @@
+:root {
+  --primary: #1E4830;
+  --secondary: #324376;
+  --neutral: #2B2826;
+
+  --primary-dark: hsl(from var(--primary) h s calc(l*0.45));
+  --primary-light: hsl(from var(--primary) h s calc(l*1.15));
+  --secondary-dark: hsl(from var(--secondary) h s calc(l*0.45));
+  --secondary-light: hsl(from var(--secondary) h s calc(l*1.15));
+  --neutral-dark: hsl(from var(--neutral) h s calc(l*0.45));
+  --neutral-light: hsl(from var(--neutral) h s calc(l*1.15));
+}
