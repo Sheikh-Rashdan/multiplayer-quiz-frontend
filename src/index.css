@@ -2,6 +2,7 @@
   --primary: #1E4830;
   --secondary: #324376;
   --neutral: #2B2826;
+  --text: #f7f7f7;
 
   --primary-dark: hsl(from var(--primary) h s calc(l*0.45));
   --primary-light: hsl(from var(--primary) h s calc(l*1.15));
@@ -14,6 +15,8 @@
 * {
   box-sizing: border-box;
   margin: 0;
+
+  color: var(--text);
 }
 
 body {
