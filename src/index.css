@@ -9,8 +9,8 @@
   --primary-light: hsl(from var(--primary) h s calc(l*1.15));
   --secondary-dark: hsl(from var(--secondary) h s calc(l*0.45));
   --secondary-light: hsl(from var(--secondary) h s calc(l*1.15));
-  --neutral-dark: hsl(from var(--neutral) h s calc(l*0.45));
-  --neutral-light: hsl(from var(--neutral) h s calc(l*1.15));
+  --neutral-dark: hsl(from var(--neutral) h s calc(l*0.75));
+  --neutral-light: hsl(from var(--neutral) h s calc(l*1.35));
 
   --highlight: hsl(from var(--neutral) h s calc(l*4));
   --shadow: rgb(from black r g b / 0.4);
