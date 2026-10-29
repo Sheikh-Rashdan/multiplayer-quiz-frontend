@@ -1,39 +1,37 @@
 import axios, { AxiosError } from "axios";
 
 export async function login(username, password) {
-    try {
-        const response = await axios.post("http://127.0.0.1:8000/users/login",
-            { username, password }
-        );
+  try {
+    const response = await axios.post("http://127.0.0.1:8000/users/login",
+      { username, password }
+    );
 
-        const authToken = response.data["token"];
-        return authToken;
+    const authToken = response.data["token"];
+    return [true, authToken];
 
-    } catch (error) {
+  } catch (error) {
 
-        if (error instanceof AxiosError) {
-            if (error.response?.status === 401) {
-                console.log('Invalid username or password!');
-                return;
-            }
-        }
-
-        throw error;
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        return [false, "Invalid username or password!"];
+      }
     }
+
+    throw error;
+  }
 }
 
 export async function signup(username, password) {
-    try {
-        const response = await axios.post("http://127.0.0.1:8000/users/signup", { username, password });
-        if (response.status === 200)
-            return await login(username, password);
-    } catch (error) {
-        if (error instanceof AxiosError) {
-            if (error.response?.status === 409) {
-                console.log("Username already exists!");
-                return;
-            }
-        }
-        throw error;
+  try {
+    const response = await axios.post("http://127.0.0.1:8000/users/signup", { username, password });
+    if (response.status === 200)
+      return login(username, password);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 409) {
+        return [false, "Username already exists!"];
+      }
     }
+    throw error;
+  }
 }
