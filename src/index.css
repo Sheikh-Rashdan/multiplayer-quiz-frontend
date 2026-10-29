@@ -38,3 +38,33 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.primaryButton {
+  background-color: var(--primary);
+  border: none;
+  border-radius: 8px;
+
+  font-size: 1.2rem;
+  padding: 0.35rem 0.5rem;
+
+  transition: transform 150ms ease-out;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--primary-light);
+}
+
+button:active {
+  transform: scale(1.03);
+}
+
+button:disabled {
+  background-color: var(--neutral-dark);
+  border: 2px solid var(--neutral-light);
+
+  color: var(--neutral-light);
+  font-weight: 500;
+
+  transform: scale(1);
+}
