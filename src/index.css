@@ -68,3 +68,15 @@ button:disabled {
 
   transform: scale(1);
 }
+
+input {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 0.4rem;
+  margin: 0.25rem;
+  text-align: center;
+  font-weight: 500;
+
+  color: var(--text-dark)
+}
