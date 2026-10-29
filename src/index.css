@@ -6,9 +6,9 @@
   --text-dark: #080808;
 
   --primary-dark: hsl(from var(--primary) h s calc(l*0.45));
-  --primary-light: hsl(from var(--primary) h s calc(l*1.25));
+  --primary-light: hsl(from var(--primary) h s calc(l*1.45));
   --secondary-dark: hsl(from var(--secondary) h s calc(l*0.45));
-  --secondary-light: hsl(from var(--secondary) h s calc(l*1.25));
+  --secondary-light: hsl(from var(--secondary) h s calc(l*1.45));
   --neutral-dark: hsl(from var(--neutral) h s calc(l*0.75));
   --neutral-light: hsl(from var(--neutral) h s calc(l*1.35));
 
