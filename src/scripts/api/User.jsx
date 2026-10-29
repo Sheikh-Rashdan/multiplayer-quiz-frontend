@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function login(username, password) {
     try {
@@ -18,6 +18,22 @@ export async function login(username, password) {
             }
         }
 
+        throw error;
+    }
+}
+
+export async function signup(username, password) {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/users/signup", { username, password });
+        if (response.status === 200)
+            return await login(username, password);
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.status === 409) {
+                console.log("Username already exists!");
+                return;
+            }
+        }
         throw error;
     }
 }
