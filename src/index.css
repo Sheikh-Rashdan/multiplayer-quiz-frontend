@@ -28,4 +28,8 @@ body {
   min-height: 100dvh;
   background-color: var(--primary-dark);
   background: linear-gradient(var(--primary-dark) -20svh, var(--primary-light) 33svh, var(--primary-dark));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
