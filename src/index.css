@@ -23,6 +23,8 @@
   font-family: "Outfit", Arial;
   font-size: 1rem;
   color: var(--text);
+
+  user-select: none;
 }
 
 ::selection {
