@@ -39,6 +39,14 @@ body {
   align-items: center;
 }
 
+.subText {
+  font-size: 0.8rem
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 .primaryButton {
   background-color: var(--primary);
   border: none;
