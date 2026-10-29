@@ -24,6 +24,10 @@
   color: var(--text);
 }
 
+::selection {
+  background-color: var(--shadow);
+}
+
 body {
   min-height: 100dvh;
   background-color: var(--primary-dark);
