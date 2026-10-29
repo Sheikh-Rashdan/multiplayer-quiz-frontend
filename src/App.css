@@ -11,3 +11,18 @@
 
     box-shadow: inset 0 0.5px 0 0 var(--highlight), 0 2.5px 12px 0 var(--shadow);
 }
+
+.secondaryCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20vw;
+    flex-direction: column;
+
+    background-color: rgba(from var(--secondary-light) r g b / 0.33);
+    padding: 0.5rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+
+    box-shadow: inset 0 0.5px 0 0 var(--highlight), 0 2.5px 12px 0 var(--shadow);
+}
