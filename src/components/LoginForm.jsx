@@ -5,6 +5,8 @@ import { AuthContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
 
+import { Eye, EyeSlash } from "@boxicons/react";
+
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -65,13 +67,24 @@ function LoginForm() {
           className="fillWidth"
           onChange={checkInputValid}
         />
-        <input
-          type={showPassword ? "text" : "password"}
-          ref={passwordInputRef}
-          placeholder="Password"
-          className="fillWidth"
-          onChange={checkInputValid}
-        />
+        <div
+          className="passwordInputDiv fillWidth"
+        >
+          <input
+            type={showPassword ? "text" : "password"}
+            ref={passwordInputRef}
+            placeholder="Password"
+            className="fillWidth"
+            onChange={checkInputValid}
+          />
+          <button className="secondaryButton" onClick={toggleShowPassword}>
+            {
+              showPassword ?
+                <EyeSlash pack="filled" /> :
+                <Eye pack="filled" />
+            }
+          </button>
+        </div>
         <div className="spacer" />
 
         <button
