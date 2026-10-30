@@ -81,6 +81,7 @@ button:disabled {
 
   transform: scale(1);
   box-shadow: none;
+  cursor: not-allowed;
 }
 
 input {
