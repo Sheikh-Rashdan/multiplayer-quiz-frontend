@@ -63,16 +63,16 @@ body {
   cursor: pointer;
 }
 
-button:hover {
+.primaryButton:hover {
   background-color: var(--primary-light);
   box-shadow: 0 0 12px -4px var(--primary-light);
 }
 
-button:active {
+.primaryButton:active {
   transform: scale(1.03);
 }
 
-button:disabled {
+.primaryButton:disabled {
   background-color: var(--neutral-dark);
   outline: 2px solid var(--neutral-light);
 
