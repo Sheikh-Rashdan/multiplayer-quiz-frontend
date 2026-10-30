@@ -3,16 +3,27 @@ import useToggle from "../scripts/utils/ToggleHook";
 import { login, signup } from "../scripts/api/User";
 import { AuthContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
+import { AxiosError } from "axios";
+
+import "./LoginForm.css";
 
 function LoginForm() {
   const [showPassword, toggleShowPassword] = useToggle(false);
   const [isLogin, toggleIsLogin] = useToggle(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isInputValid, setIsInputValid] = useState(false);
 
   const { setAuthToken } = useContext(AuthContext);
 
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+
+  function checkInputValid() {
+    const usernameString = usernameInputRef.current?.value.trim() ?? "";
+    const passwordString = passwordInputRef.current?.value.trim() ?? "";
+
+    setIsInputValid(usernameString.length !== 0 && passwordString.length !== 0);
+  }
 
   function onLogin() {
     setErrorMessage("");
@@ -22,17 +33,27 @@ function LoginForm() {
 
     const fn_to_rn = isLogin ? login : signup;
 
+    let newErrorMessage;
+
     fn_to_rn(usernameString, passwordString)
       .then(([success, result]) => {
         if (success) {
           setAuthToken(result);
         } else {
-          setErrorMessage(result);
-          const errorTimeout = setTimeout(() => setErrorMessage(""), 3000);
-          return () => clearTimeout(errorTimeout);
+          newErrorMessage = result;
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        if (error instanceof AxiosError) {
+          newErrorMessage = error.message;
+        }
+      });
+
+    if (newErrorMessage) {
+      setErrorMessage(newErrorMessage);
+      const errorTimeout = setTimeout(() => setErrorMessage(""), 3000);
+      return () => clearTimeout(errorTimeout);
+    }
   }
 
   return (
@@ -46,18 +67,21 @@ function LoginForm() {
           ref={usernameInputRef}
           placeholder="Username"
           className="fillWidth"
+          onChange={checkInputValid}
         />
         <input
           type={showPassword ? "text" : "password"}
           ref={passwordInputRef}
           placeholder="Password"
           className="fillWidth"
+          onChange={checkInputValid}
         />
         <div className="spacer" />
 
         <button
           className="primaryButton fillWidth"
           onClick={onLogin}
+          disabled={!isInputValid}
         >
           {isLogin ? "Login" : "Signup"}
         </button>
@@ -76,7 +100,7 @@ function LoginForm() {
       </div>
 
       <AnimatePresence>
-        {errorMessage && (
+        {errorMessage !== "" && (
           <motion.div
             className={`secondaryCard snackBar`}
             initial={{ y: -100 }}
