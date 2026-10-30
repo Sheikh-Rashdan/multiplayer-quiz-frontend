@@ -15,7 +15,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 20vw;
     flex-direction: column;
 
     background-color: rgba(from var(--secondary-light) r g b / 0.33);
