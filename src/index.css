@@ -57,12 +57,15 @@ body {
   font-size: 1.2rem;
   padding: 0.35rem 0.5rem;
 
-  transition: transform 150ms ease-out;
+  transition-property: transform, color, background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
   cursor: pointer;
 }
 
 button:hover {
   background-color: var(--primary-light);
+  box-shadow: 0 0 12px -4px var(--primary-light);
 }
 
 button:active {
@@ -71,12 +74,13 @@ button:active {
 
 button:disabled {
   background-color: var(--neutral-dark);
-  border: 2px solid var(--neutral-light);
+  outline: 2px solid var(--neutral-light);
 
   color: var(--neutral-light);
   font-weight: 500;
 
   transform: scale(1);
+  box-shadow: none;
 }
 
 input {
