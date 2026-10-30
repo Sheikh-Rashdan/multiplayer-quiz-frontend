@@ -91,6 +91,33 @@ button {
   cursor: not-allowed;
 }
 
+.secondaryButton {
+  background-color: var(--secondary);
+  border-radius: 12px;
+
+  transition-property: color, background-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+  cursor: pointer;
+}
+
+.secondaryButton:hover {
+  background-color: var(--secondary-light);
+}
+
+.secondaryButton:active {
+  background-color: var(--secondary);
+}
+
+.secondaryButton:disabled {
+  background-color: var(--neutral-dark);
+  outline: 2px solid var(--neutral-light);
+
+  color: var(--neutral-light);
+
+  cursor: not-allowed;
+}
+
 input {
   border: none;
   outline: none;
