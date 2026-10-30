@@ -49,9 +49,16 @@ body {
   cursor: pointer;
 }
 
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+}
+
 .primaryButton {
   background-color: var(--primary);
-  border: none;
   border-radius: 8px;
 
   font-size: 1.2rem;
