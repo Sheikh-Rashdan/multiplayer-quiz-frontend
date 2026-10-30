@@ -9,10 +9,16 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setAuthToken(localStorage.getItem("authToken"));
+  }, []);
+
+  useEffect(() => {
     if (authToken == null) {
       navigate("/login");
       return;
     }
+
+    localStorage.setItem("authToken", authToken);
     navigate("/home");
   }, [authToken]);
 
