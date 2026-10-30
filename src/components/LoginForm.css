@@ -4,3 +4,13 @@
 
     min-width: 25vw;
 }
+
+.passwordInputDiv {
+    display: flex;
+    gap: 0.35rem;
+    margin: 0.25rem;
+
+    * {
+        margin: 0;
+    }
+}
