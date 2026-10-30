@@ -99,9 +99,9 @@ function LoginForm() {
         {errorMessage !== "" && (
           <motion.div
             className={`secondaryCard snackBar`}
-            initial={{ y: -100 }}
+            initial={{ y: -130 }}
             animate={{ y: 0 }}
-            exit={{ y: -100 }}
+            exit={{ y: -130 }}
             transition={{ duration: 0.5, type: "spring" }}
           >
             <p>{errorMessage}</p>
