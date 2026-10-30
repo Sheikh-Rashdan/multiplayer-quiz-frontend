@@ -2,18 +2,25 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import LoginForm from './components/LoginForm';
 import { AuthContext } from './Contexts';
+import { Route, Routes, useNavigate } from 'react-router';
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (authToken == null) return;
-    console.log("Logged in");
+    if (authToken == null) {
+      navigate("/login");
+      return;
+    }
+    navigate("/home");
   }, [authToken]);
 
   return (
     <AuthContext value={{ authToken, setAuthToken }}>
-      <LoginForm />
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+      </Routes>
     </AuthContext>
   );
 }
