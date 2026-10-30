@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 20vw;
     flex-direction: column;
 
     background-color: var(--neutral);
