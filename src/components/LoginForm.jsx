@@ -25,7 +25,7 @@ function LoginForm() {
     setIsInputValid(usernameString.length !== 0 && passwordString.length !== 0);
   }
 
-  function onLogin() {
+  async function onLogin() {
     setErrorMessage("");
 
     const usernameString = usernameInputRef.current.value.trim();
@@ -35,19 +35,15 @@ function LoginForm() {
 
     let newErrorMessage;
 
-    fn_to_rn(usernameString, passwordString)
-      .then(([success, result]) => {
-        if (success) {
-          setAuthToken(result);
-        } else {
-          newErrorMessage = result;
-        }
-      })
-      .catch(error => {
-        if (error instanceof AxiosError) {
-          newErrorMessage = error.message;
-        }
-      });
+    try {
+      const [success, result] = await fn_to_rn(usernameString, passwordString);
+
+      if (success) setAuthToken(result);
+      else newErrorMessage = result;
+    } catch (error) {
+      if (error instanceof AxiosError)
+        newErrorMessage = error.message;
+    }
 
     if (newErrorMessage) {
       setErrorMessage(newErrorMessage);
