@@ -58,7 +58,7 @@ function LoginForm() {
 
   return (
     <>
-      <div className="primaryCard">
+      <div className="primaryCard loginFormCard">
         <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
         <div className="spacer" />
 
