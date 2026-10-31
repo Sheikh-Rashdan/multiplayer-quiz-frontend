@@ -1,21 +1,45 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import useToggle from "../scripts/utils/ToggleHook";
-import { login, signup } from "../scripts/api/User";
+import { login, signup, getMe } from "../scripts/api/User";
 import { AuthContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router";
 
 import { Eye, EyeSlash } from "@boxicons/react";
 
 import "./LoginForm.css";
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const [showPassword, toggleShowPassword] = useToggle(false);
   const [isLogin, toggleIsLogin] = useToggle(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [isInputValid, setIsInputValid] = useState(false);
 
-  const { setAuthToken } = useContext(AuthContext);
+  const { authToken, setAuthToken } = useContext(AuthContext);
+
+  async function validateSession() {
+    if (authToken == null) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const [success, user] = await getMe(authToken);
+      if (success) {
+        localStorage.setItem("authToken", authToken);
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    validateSession();
+  }, [authToken]);
 
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
