@@ -36,18 +36,18 @@ export async function signup(username, password) {
   }
 }
 
-export async function getMe(authToken) {
+export async function getMe(backToLogin, authToken) {
   try {
     const response = await axios.get("http://127.0.0.1:8000/users/me",
       { "headers": { "Authorization": `Bearer ${authToken}` } })
     if (response.status === 200) {
       const user = response.data;
-      return [true, user];
+      return user;
     }
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response?.status === 401) {
-        return [false, "Invalid Token/Session Expired"];
+        backToLogin();
       }
     }
     throw error;

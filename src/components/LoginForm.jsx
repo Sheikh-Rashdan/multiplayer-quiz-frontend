@@ -18,7 +18,7 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isInputValid, setIsInputValid] = useState(false);
 
-  const { authToken, setAuthToken } = useContext(AuthContext);
+  const { authToken, setAuthToken, backToLogin } = useContext(AuthContext);
 
   async function validateSession() {
     if (authToken == null) {
@@ -27,8 +27,8 @@ function LoginForm() {
     }
 
     try {
-      const [success, user] = await getMe(authToken);
-      if (success) {
+      const user = await getMe(backToLogin, authToken);
+      if (user != null) {
         localStorage.setItem("authToken", authToken);
         navigate("/home");
       }
