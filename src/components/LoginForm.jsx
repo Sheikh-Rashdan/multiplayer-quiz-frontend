@@ -4,7 +4,7 @@ import { login, signup, getMe } from "../scripts/api/User";
 import { AuthContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { Eye, EyeSlash } from "@boxicons/react";
 
@@ -12,6 +12,7 @@ import "./LoginForm.css";
 import nohootLogo from "../assets/nohoot_2x.png"
 
 function LoginForm() {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [showPassword, toggleShowPassword] = useToggle(false);
@@ -23,7 +24,7 @@ function LoginForm() {
 
   async function validateSession() {
     if (authToken == null) {
-      navigate("/login");
+      if (location.pathname !== "/login") navigate("/login");
       return;
     }
 
