@@ -6,21 +6,10 @@ import { Route, Routes, useNavigate } from 'react-router';
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("authToken"));
   }, []);
-
-  useEffect(() => {
-    if (authToken == null) {
-      navigate("/login");
-      return;
-    }
-
-    localStorage.setItem("authToken", authToken);
-    navigate("/home");
-  }, [authToken]);
 
   return (
     <AuthContext value={{ authToken, setAuthToken }}>
