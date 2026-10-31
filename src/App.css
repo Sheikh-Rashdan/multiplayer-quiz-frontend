@@ -50,3 +50,12 @@
 .fillWidth {
     width: 100%;
 }
+
+.logoImage2x {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+
+    justify-self: center;
+}
