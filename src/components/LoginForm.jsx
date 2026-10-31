@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { Eye, EyeSlash } from "@boxicons/react";
 
 import "./LoginForm.css";
+import nohootLogo from "../assets/nohoot_2x.png"
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ function LoginForm() {
 
   return (
     <>
+      <img src={nohootLogo} className="logoImage2x" />
       <div className="primaryCard loginFormCard">
         <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
         <div className="spacer" />
