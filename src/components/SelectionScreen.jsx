@@ -7,20 +7,22 @@ import nohootLogo from "../assets/nohoot_2x.png"
 function SelectionScreen() {
     return (
         <>
-            <img src={nohootLogo} className="logoImage2x" />
-            <div className="selectionDiv">
-                <Link to="/host" className="screenLink">
-                    <button className="selectionButton">
-                        <HomeAdd pack="filled" className="icon" />
-                        <p>Host</p>
-                    </button>
-                </Link>
-                <Link to="/join" className="screenLink">
-                    <button className="selectionButton">
-                        <DoorOpenAlt pack="filled" className="icon" />
-                        <p>Join</p>
-                    </button>
-                </Link>
+            <div className="parentContainer">
+                <img src={nohootLogo} className="logoImage2x" />
+                <div className="selectionDiv">
+                    <Link to="/host" className="screenLink">
+                        <button className="selectionButton">
+                            <HomeAdd pack="filled" className="icon" />
+                            <p>Host</p>
+                        </button>
+                    </Link>
+                    <Link to="/join" className="screenLink">
+                        <button className="selectionButton">
+                            <DoorOpenAlt pack="filled" className="icon" />
+                            <p>Join</p>
+                        </button>
+                    </Link>
+                </div>
             </div>
         </>
     );
