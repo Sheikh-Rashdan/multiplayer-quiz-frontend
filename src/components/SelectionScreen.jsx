@@ -2,10 +2,12 @@ import { Link } from "react-router";
 
 import { HomeAdd, DoorOpenAlt } from "@boxicons/react";
 import "./SelectionScreen.css";
+import nohootLogo from "../assets/nohoot_2x.png"
 
 function SelectionScreen() {
     return (
         <>
+            <img src={nohootLogo} className="logoImage2x" />
             <div className="selectionDiv">
                 <Link to="/host" className="screenLink">
                     <button className="selectionButton">
