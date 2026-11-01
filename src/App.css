@@ -50,12 +50,21 @@
 }
 
 .logoImage2x {
+    justify-self: center;
+}
+
+.logoImage2x.fixed {
     position: absolute;
     top: 2rem;
     left: 0;
     right: 0;
+}
 
-    justify-self: center;
+.parentContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
 }
 
 .loadingOverlay {

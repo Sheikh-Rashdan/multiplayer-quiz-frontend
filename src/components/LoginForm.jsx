@@ -86,7 +86,7 @@ function LoginForm() {
 
   return (
     <>
-      <img src={nohootLogo} className="logoImage2x" />
+      <img src={nohootLogo} className="logoImage2x fixed" />
       <div className="primaryCard loginFormCard">
         <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
         <div className="spacer" />
