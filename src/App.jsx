@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import { AuthContext } from './Contexts';
 import { Route, Routes, useNavigate } from 'react-router';
 import SelectionScreen from './components/SelectionScreen';
+import SelectQuizScreen from './components/SelectQuizScreen';
 
 function App() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/home" element={<SelectionScreen />} />
+        <Route path="/host" element={<SelectQuizScreen />} />
         <Route path="*" element={<LoginForm />} />
       </Routes>
     </AuthContext>
