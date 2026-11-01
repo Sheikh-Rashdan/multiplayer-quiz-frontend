@@ -138,7 +138,7 @@ function LoginForm() {
       <AnimatePresence>
         {errorMessage !== "" && (
           <motion.div
-            className={`secondaryCard snackBar`}
+            className={`snackBar`}
             initial={{ y: -130 }}
             animate={{ y: 0 }}
             exit={{ y: -130 }}
