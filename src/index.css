@@ -58,6 +58,11 @@ button {
 }
 
 .primaryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+
   background-color: var(--primary);
   border-radius: 8px;
 
