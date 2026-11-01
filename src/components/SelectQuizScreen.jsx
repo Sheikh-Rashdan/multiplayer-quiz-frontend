@@ -4,7 +4,7 @@ import { getMyQuizzes } from "../scripts/api/Quiz";
 import { getMe } from "../scripts/api/User";
 
 function SelectQuizScreen() {
-    const { authToken, backToLogin, setAuthToken } = useContext(AuthContext);
+    const { authToken, backToLogin } = useContext(AuthContext);
     const [quizzes, setQuizzes] = useState([]);
 
     async function loadQuizzes() {
