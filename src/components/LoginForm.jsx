@@ -1,7 +1,7 @@
 import { useContext, useRef, useState, useEffect } from "react";
 import useToggle from "../scripts/utils/ToggleHook";
 import { login, signup, getMe } from "../scripts/api/User";
-import { AuthContext } from "../Contexts";
+import { AuthContext, LoadingContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
 import { useLocation, useNavigate } from "react-router";
@@ -21,6 +21,7 @@ function LoginForm() {
   const [isInputValid, setIsInputValid] = useState(false);
 
   const { authToken, setAuthToken, backToLogin } = useContext(AuthContext);
+  const { setIsLoading } = useContext(LoadingContext);
 
   async function validateSession() {
     if (authToken == null) {
@@ -64,6 +65,7 @@ function LoginForm() {
     let newErrorMessage;
 
     try {
+      setIsLoading(true);
       const [success, result] = await fn_to_rn(usernameString, passwordString);
 
       if (success) setAuthToken(result);
@@ -71,6 +73,8 @@ function LoginForm() {
     } catch (error) {
       if (error instanceof AxiosError)
         newErrorMessage = error.message;
+    } finally {
+      setIsLoading(false);
     }
 
     if (newErrorMessage) {
