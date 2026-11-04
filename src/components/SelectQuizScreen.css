@@ -22,6 +22,7 @@
     border: 1px solid var(--neutral-light);
 
     text-align: center;
+    text-decoration: none;
 
     transition-property: background-color, color, border;
     transition-duration: 150ms;
