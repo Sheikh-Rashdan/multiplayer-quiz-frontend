@@ -31,6 +31,10 @@
   background-color: var(--shadow);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   min-height: 100dvh;
   background-color: var(--primary-dark);
