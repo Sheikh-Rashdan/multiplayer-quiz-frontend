@@ -3,6 +3,9 @@ import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
+import { TrashX } from "@boxicons/react";
+
+import "./ViewQuizScreen.css";
 
 function ViewQuizScreen() {
     const { authToken, backToLogin } = useContext(AuthContext);
@@ -30,6 +33,30 @@ function ViewQuizScreen() {
 
     return (
         <>
+            <div className="secondaryCard">
+                <p className="quizName">{quiz?.name}</p>
+                <div className="spacer" />
+                <div className="questionContainer">
+                    {
+                        questions?.map((question, index) => (
+                            <div key={question.id} className="questionCard">
+                                <div className="questionNumberContainer">{index + 1}</div>
+                                <div className="questionDetailsContainer">
+                                    <p className="questionLabel">{question.question}</p>
+                                    <div className="optionsContainer">
+                                        {question.options.map((option, index) => (
+                                            <p key={index}>{`${index + 1}. ${option}`}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                                <button className="deleteButton">
+                                    <TrashX pack="filled" />
+                                </button>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         </>
     );
 }
