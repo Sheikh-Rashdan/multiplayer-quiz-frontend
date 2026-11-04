@@ -12,3 +12,25 @@
     padding: 0.7rem 0;
     margin: -0.7rem 0;
 }
+
+.quizCard {
+    width: 100%;
+    padding: 0.5rem;
+
+    background-color: var(--neutral-dark);
+    border-radius: 8px;
+    border: 1px solid var(--neutral-light);
+
+    text-align: center;
+
+    transition-property: background-color, color, border;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+}
+
+.quizCard:hover {
+    color: var(--secondary-light);
+    background-color: var(--secondary-dark);
+    border: 1px solid var(--secondary);
+}

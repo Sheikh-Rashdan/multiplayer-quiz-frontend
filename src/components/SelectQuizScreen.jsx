@@ -35,7 +35,7 @@ function SelectQuizScreen() {
                     </button>
                     <div className="spacer" />
                     <div className="quizContainer">
-                        {quizzes.map(quiz => <p key={quiz.id}>{quiz.name}</p>)}
+                        {quizzes.map(quiz => <p key={quiz.id} className="quizCard">{quiz.name}</p>)}
                         {quizzes.length === 0 && <p>No quizzes</p>}
                     </div>
                 </div>
