@@ -6,6 +6,7 @@ import { Route, Routes, useNavigate } from 'react-router';
 import SelectionScreen from './components/SelectionScreen';
 import SelectQuizScreen from './components/SelectQuizScreen';
 import { motion } from "motion/react";
+import ViewQuizScreen from './components/ViewQuizScreen';
 
 function App() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/home" element={<SelectionScreen />} />
           <Route path="/host" element={<SelectQuizScreen />} />
+          <Route path="/view_quiz" element={<ViewQuizScreen />} />
           <Route path="*" element={<LoginForm />} />
         </Routes>
         {isLoading && <LoadingOverlay />}
