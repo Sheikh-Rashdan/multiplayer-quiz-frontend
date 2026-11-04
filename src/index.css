@@ -3,7 +3,7 @@
   --secondary: #324376;
   --neutral: #2B2826;
   --text: #f7f7f7;
-  --text-dark: #080808;
+  --text-dark: #202020;
 
   --primary-dark: hsl(from var(--primary) h s calc(l*0.45));
   --primary-light: hsl(from var(--primary) h s calc(l*1.45));
