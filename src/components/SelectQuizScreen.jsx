@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts";
 import { getMyQuizzes } from "../scripts/api/Quiz";
 import { getMe } from "../scripts/api/User";
+import { NavLink } from "react-router";
 
 import { PlusCircle } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_2x.png"
@@ -35,7 +36,17 @@ function SelectQuizScreen() {
                     </button>
                     <div className="spacer" />
                     <div className="quizContainer">
-                        {quizzes.map(quiz => <p key={quiz.id} className="quizCard">{quiz.name}</p>)}
+                        {
+                            quizzes.map(quiz => (
+                                <NavLink
+                                    key={quiz.id}
+                                    to={`/view_quiz?quiz_id=${quiz.id}`}
+                                    className="quizCard"
+                                >
+                                    {quiz.name}
+                                </NavLink>
+                            ))
+                        }
                         {quizzes.length === 0 && <p>No quizzes</p>}
                     </div>
                 </div>
