@@ -1,3 +1,14 @@
 .quizContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+    gap: 0.5rem;
     height: 40vh;
+
+    overflow-y: scroll;
+    mask-image: linear-gradient(transparent, black 5%, black 95%, transparent);
+    padding: 0.7rem 0;
+    margin: -0.7rem 0;
 }
