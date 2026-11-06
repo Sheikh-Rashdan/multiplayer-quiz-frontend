@@ -8,7 +8,7 @@ export async function getQuestionsForQuiz(backToLogin, authToken, quizId) {
         return questions;
     } catch (error) {
         if (error instanceof AxiosError) {
-            if (error.status === 401) {
+            if ([401, 403, 404].includes(error.status)) {
                 backToLogin();
                 return;
             }
