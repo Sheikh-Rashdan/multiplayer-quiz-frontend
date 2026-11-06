@@ -92,6 +92,12 @@
     transform: scale(1.05);
 }
 
+.buttonRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+}
+
 .secondaryCard .secondaryButton {
     margin-top: 0.8rem;
 }
