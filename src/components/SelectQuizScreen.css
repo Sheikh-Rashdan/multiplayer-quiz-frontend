@@ -35,3 +35,23 @@
     background-color: var(--secondary-dark);
     border: 1px solid var(--secondary);
 }
+
+.overlay .primaryCard {
+    gap: 0.2rem;
+}
+
+.overlayCardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    p {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    button {
+        padding: 0.1rem;
+    }
+}
