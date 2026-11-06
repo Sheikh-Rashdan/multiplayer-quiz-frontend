@@ -52,3 +52,18 @@ export async function createQuiz(backToLogin, authToken, name) {
         throw error;
     }
 }
+
+export async function deleteQuizFromId(backToLogin, authToken, quizId) {
+    try {
+        await axios.delete(`http://127.0.0.1:8000/quizzes/${quizId}`,
+            { "headers": { "Authorization": `Bearer ${authToken}` } });
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if ([401, 403, 404].includes(error.status)) {
+                backToLogin();
+                return;
+            }
+        }
+        throw error;
+    }
+}
