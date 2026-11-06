@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import { getQuizFromId } from "../scripts/api/Quiz";
+import { getQuizFromId, deleteQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
 import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
 import { TrashX, PlusCircle, Play } from "@boxicons/react";
@@ -31,6 +31,11 @@ function ViewQuizScreen() {
     async function deleteQuestion(questionToDelete) {
         await deleteQuestionFromId(backToLogin, authToken, quiz.id, questionToDelete.id);
         setRefreshKey(refreshKey + 1);
+    }
+
+    async function deleteQuiz() {
+        await deleteQuizFromId(backToLogin, authToken, quiz.id);
+        navigate("/host");
     }
 
     useEffect(() => {
