@@ -74,11 +74,24 @@ function ViewQuizScreen() {
                         )
                     }
                 </div>
-                <button className="secondaryButton fillWidth">
-                    <p>Add New Question</p>
-                    <PlusCircle pack="filled" />
-                </button>
-                <button className="primaryButton fillWidth">
+                <div className="buttonRow fillWidth">
+                    <button
+                        className="secondaryButton"
+                        onClick={deleteQuiz}
+                    >
+                        <p>Delete Quiz</p>
+                        <TrashX pack="filled" />
+                    </button>
+                    <button
+                        className="secondaryButton"
+                    >
+                        <p>Add New Question</p>
+                        <PlusCircle pack="filled" />
+                    </button>
+                </div>
+                <button
+                    className="primaryButton fillWidth"
+                >
                     <p>Start Quiz</p>
                     <Play pack="filled" />
                 </button>
