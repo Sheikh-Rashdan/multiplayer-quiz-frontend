@@ -63,6 +63,11 @@ function ViewQuizScreen() {
                             </div>
                         ))
                     }
+                    {
+                        (questions == null || questions?.length === 0) && (
+                            <p style={{ textAlign: "center" }}>No questions</p>
+                        )
+                    }
                 </div>
                 <button className="primaryButton fillWidth">
                     <p>Add New Question</p>
