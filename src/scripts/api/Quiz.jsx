@@ -8,7 +8,7 @@ export async function getMyQuizzes(backToLogin, authToken) {
         return quizzes;
     } catch (error) {
         if (error instanceof AxiosError) {
-            if (error.status === 401) {
+            if ([401, 403, 404].includes(error.status)) {
                 backToLogin();
                 return;
             }
@@ -26,7 +26,7 @@ export async function getQuizFromId(backToLogin, authToken, quizId) {
         return quiz;
     } catch (error) {
         if (error instanceof AxiosError) {
-            if (error.status === 401) {
+            if ([401, 403, 404].includes(error.status)) {
                 backToLogin();
                 return;
             }
