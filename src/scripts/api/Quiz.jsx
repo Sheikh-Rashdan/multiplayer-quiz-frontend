@@ -35,3 +35,20 @@ export async function getQuizFromId(backToLogin, authToken, quizId) {
         throw error;
     }
 }
+
+export async function createQuiz(backToLogin, authToken, name) {
+    try {
+        await axios.post(`http://127.0.0.1:8000/quizzes`,
+            { name },
+            { "headers": { "Authorization": `Bearer ${authToken}` } });
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.status === 401) {
+                backToLogin();
+                return;
+            }
+        }
+
+        throw error;
+    }
+}
