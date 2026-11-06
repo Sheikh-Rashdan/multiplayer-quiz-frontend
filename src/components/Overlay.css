@@ -1,0 +1,23 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    --inner: rgba(0 0 0 / 0.7);
+    --outer: rgba(0 0 0 / 0.3);
+    background: radial-gradient(var(--inner), var(--outer));
+    z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+        font-weight: 500;
+        color: white;
+    }
+}
