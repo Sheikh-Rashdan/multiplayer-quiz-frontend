@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
-import { getQuestionsForQuiz } from "../scripts/api/Question";
+import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
 import { TrashX } from "@boxicons/react";
 
 import "./ViewQuizScreen.css";
@@ -15,6 +15,7 @@ function ViewQuizScreen() {
 
     const [quiz, setQuiz] = useState();
     const [questions, setQuestions] = useState();
+    const [refreshKey, setRefreshKey] = useState(0);
 
     async function retrieveQuiz() {
         const retrievedQuizId = searchParams.get("quiz_id");
@@ -22,14 +23,19 @@ function ViewQuizScreen() {
             navigate("/host");
             return false;
         }
-        setQuiz(await getQuizFromId(authToken, backToLogin, retrievedQuizId));
-        setQuestions(await getQuestionsForQuiz(authToken, backToLogin, retrievedQuizId));
+        setQuiz(await getQuizFromId(backToLogin, authToken, retrievedQuizId));
+        setQuestions(await getQuestionsForQuiz(backToLogin, authToken, retrievedQuizId));
         return true;
+    }
+
+    async function deleteQuestion(questionToDelete) {
+        await deleteQuestionFromId(backToLogin, authToken, quiz.id, questionToDelete.id);
+        setRefreshKey(refreshKey + 1);
     }
 
     useEffect(() => {
         if (!retrieveQuiz()) return;
-    }, [searchParams])
+    }, [searchParams, refreshKey])
 
     return (
         <>
@@ -49,7 +55,9 @@ function ViewQuizScreen() {
                                         ))}
                                     </div>
                                 </div>
-                                <button className="deleteButton">
+                                <button
+                                    className="deleteButton"
+                                    onClick={() => deleteQuestion(question)}>
                                     <TrashX pack="filled" />
                                 </button>
                             </div>
