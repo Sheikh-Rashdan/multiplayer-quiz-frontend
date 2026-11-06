@@ -4,9 +4,10 @@ import { createQuiz, getMyQuizzes } from "../scripts/api/Quiz";
 import { getMe } from "../scripts/api/User";
 import { NavLink } from "react-router";
 
-import { PlusCircle } from "@boxicons/react";
+import { PlusCircle, X } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_2x.png"
 import "./SelectQuizScreen.css";
+import Overlay from "./Overlay";
 
 
 function SelectQuizScreen() {
@@ -66,6 +67,34 @@ function SelectQuizScreen() {
                     </div>
                 </div>
             </div>
+            <Overlay condition={isCreating}>
+                <div className="primaryCard">
+                    <div className="overlayCardTitle">
+                        <p>Create a New Quiz</p>
+                        <button
+                            className="secondaryButton"
+                            onClick={() => setIsCreating(false)}
+                        >
+                            <X pack="filled" />
+                        </button>
+                    </div>
+                    <div className="spacer"></div>
+                    <input
+                        type="text"
+                        placeholder="Quiz Name"
+                        className="fillWidth"
+                        ref={quizNameInputRef}
+                    />
+
+                    <button
+                        className="primaryButton fillWidth"
+                        onClick={createNewQuiz}
+                    >
+                        <p>Create</p>
+                        <PlusCircle pack="filled" />
+                    </button>
+                </div>
+            </Overlay>
         </>
     );
 }
