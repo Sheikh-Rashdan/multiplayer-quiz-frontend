@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
 import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
-import { TrashX, PlusCircle } from "@boxicons/react";
+import { TrashX, PlusCircle, Play } from "@boxicons/react";
 
 import "./ViewQuizScreen.css";
 
@@ -69,9 +69,13 @@ function ViewQuizScreen() {
                         )
                     }
                 </div>
-                <button className="primaryButton fillWidth">
+                <button className="secondaryButton fillWidth">
                     <p>Add New Question</p>
                     <PlusCircle pack="filled" />
+                </button>
+                <button className="primaryButton fillWidth">
+                    <p>Start Quiz</p>
+                    <Play pack="filled" />
                 </button>
             </div>
         </>
