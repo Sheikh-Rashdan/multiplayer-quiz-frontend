@@ -53,3 +53,18 @@ export async function getMe(backToLogin, authToken) {
     throw error;
   }
 }
+
+export async function getUserFromId(user_id) {
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/users/${user_id}`);
+    const user = response.data;
+    return user;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.status == 404) {
+        return;
+      }
+    }
+    throw error;
+  }
+}
