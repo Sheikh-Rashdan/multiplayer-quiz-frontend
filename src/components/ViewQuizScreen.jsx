@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId, deleteQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
 import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
 import Overlay from "./Overlay";
-import { TrashX, PlusCircle, Play } from "@boxicons/react";
+import { TrashX, PlusCircle, Play, X } from "@boxicons/react";
 
 import "./ViewQuizScreen.css";
 
@@ -19,6 +19,7 @@ function ViewQuizScreen() {
     const [refreshKey, setRefreshKey] = useState(0);
 
     const [isCreating, setIsCreating] = useState(false);
+    const questionInputRef = useRef();
 
     async function retrieveQuiz() {
         const retrievedQuizId = searchParams.get("quiz_id");
@@ -100,7 +101,33 @@ function ViewQuizScreen() {
                     <Play pack="filled" />
                 </button>
             </div>
-            <Overlay condition={isCreating}></Overlay>
+            <Overlay condition={isCreating}>
+                <div className="primaryCard">
+                    <div className="overlayCardTitle">
+                        <p>Add a New Question</p>
+                        <button
+                            className="secondaryButton"
+                            onClick={() => setIsCreating(false)}
+                        >
+                            <X pack="filled" />
+                        </button>
+                    </div>
+                    <div className="spacer"></div>
+                    <input
+                        type="text"
+                        placeholder="Question"
+                        className="fillWidth"
+                        ref={questionInputRef}
+                    />
+
+                    <button
+                        className="primaryButton fillWidth"
+                    >
+                        <p>Add</p>
+                        <PlusCircle pack="filled" />
+                    </button>
+                </div>
+            </Overlay>
         </>
     );
 }
