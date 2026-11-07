@@ -22,6 +22,7 @@ function ViewQuizScreen() {
     const questionInputRef = useRef();
     const [optionCount, setOptionCount] = useState(2)
     const [answerIndex, setAnswerIndex] = useState(0);
+    const [optionInputs, setOptionInputs] = useState({});
 
     async function retrieveQuiz() {
         const retrievedQuizId = searchParams.get("quiz_id");
@@ -63,10 +64,15 @@ function ViewQuizScreen() {
             return;
         }
         setOptionCount(newOptionCount);
-
     }
 
     useEffect(() => verifyAndSetAnswerIndex(answerIndex), [optionCount]);
+
+    function setOption(value, index) {
+        const newOptionInputs = structuredClone(optionInputs);
+        newOptionInputs[index] = value;
+        setOptionInputs(newOptionInputs);
+    }
 
     return (
         <>
@@ -161,6 +167,7 @@ function ViewQuizScreen() {
                                         type="text"
                                         placeholder={`Option ${index + 1}`}
                                         className="fillWidth"
+                                        onChange={(event) => setOption(event.target.value, index)}
                                     />
                                     <button
                                         onClick={() => verifyAndSetAnswerIndex(index)}
