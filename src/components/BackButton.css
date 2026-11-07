@@ -1,0 +1,21 @@
+.backButton {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    aspect-ratio: 1;
+
+    background: none;
+    cursor: pointer;
+
+    * {
+        width: 2.5rem;
+        height: 2.5rem;
+        transition: transform 150ms ease-out;
+    }
+}
+
+.backButton:hover {
+    * {
+        transform: scale(1.05);
+    }
+}
