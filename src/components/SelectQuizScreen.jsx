@@ -8,7 +8,7 @@ import { PlusCircle, X } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_2x.png"
 import "./SelectQuizScreen.css";
 import Overlay from "./Overlay";
-
+import BackButton from "./BackButton";
 
 function SelectQuizScreen() {
     const { authToken, backToLogin } = useContext(AuthContext);
@@ -46,6 +46,7 @@ function SelectQuizScreen() {
 
     return (
         <>
+            <BackButton destination="/home" />
             <div className="parentContainer">
                 <img src={nohootLogo} className="logoImage2x" />
 

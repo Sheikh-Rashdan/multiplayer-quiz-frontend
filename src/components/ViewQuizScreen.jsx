@@ -7,6 +7,7 @@ import Overlay from "./Overlay";
 import { TrashX, PlusCircle, Play, X, RadioCircle, RadioCircleMarked, MinusCircle } from "@boxicons/react";
 
 import "./ViewQuizScreen.css";
+import BackButton from "./BackButton";
 
 function ViewQuizScreen() {
     const { authToken, backToLogin } = useContext(AuthContext);
@@ -117,6 +118,7 @@ function ViewQuizScreen() {
 
     return (
         <>
+            <BackButton destination="/host" />
             <div className="secondaryCard">
                 <p className="quizName">{quiz?.name}</p>
                 <div className="spacer" />
