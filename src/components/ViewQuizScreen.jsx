@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId, deleteQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
 import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
+import Overlay from "./Overlay";
 import { TrashX, PlusCircle, Play } from "@boxicons/react";
 
 import "./ViewQuizScreen.css";
@@ -16,6 +17,8 @@ function ViewQuizScreen() {
     const [quiz, setQuiz] = useState();
     const [questions, setQuestions] = useState();
     const [refreshKey, setRefreshKey] = useState(0);
+
+    const [isCreating, setIsCreating] = useState(false);
 
     async function retrieveQuiz() {
         const retrievedQuizId = searchParams.get("quiz_id");
@@ -84,6 +87,7 @@ function ViewQuizScreen() {
                     </button>
                     <button
                         className="secondaryButton"
+                        onClick={() => setIsCreating(true)}
                     >
                         <p>Add New Question</p>
                         <PlusCircle pack="filled" />
@@ -96,6 +100,7 @@ function ViewQuizScreen() {
                     <Play pack="filled" />
                 </button>
             </div>
+            <Overlay condition={isCreating}></Overlay>
         </>
     );
 }
