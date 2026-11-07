@@ -7,6 +7,7 @@ import SelectionScreen from './components/SelectionScreen';
 import SelectQuizScreen from './components/SelectQuizScreen';
 import ViewQuizScreen from './components/ViewQuizScreen';
 import Overlay from './components/Overlay';
+import JoinRoomScreen from './components/JoinRoomScreen';
 
 function App() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/home" element={<SelectionScreen />} />
           <Route path="/host" element={<SelectQuizScreen />} />
           <Route path="/view_quiz" element={<ViewQuizScreen />} />
+          <Route path="/join" element={<JoinRoomScreen />} />
           <Route path="*" element={<LoginForm />} />
         </Routes>
         <LoadingOverlay condition={isLoading} />
