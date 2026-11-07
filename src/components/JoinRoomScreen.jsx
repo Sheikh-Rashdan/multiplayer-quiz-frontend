@@ -58,7 +58,19 @@ function JoinRoomScreen() {
               {validRoom
                 ? (
                   <>
-                    <p>Room valid</p>
+                    <p>Room Details:</p>
+                    <div className="roomInfoRow">
+                      <p>Quiz:</p><p>{quiz?.name ?? "Quiz Name"}</p>
+                    </div>
+                    <div className="roomInfoRow">
+                      <p>Host:</p><p>{hostName ?? "Host Name"}</p>
+                    </div>
+                    <div className="roomInfoRow">
+                      <p>Players:</p><p>{Object.keys(room?.player_ids).length}</p>
+                    </div>
+                    <div className="roomInfoRow">
+                      <p>Status:</p><p>{room?.status.toUpperCase()}</p>
+                    </div>
                   </>
                 )
                 : <p>Invalid Code!</p>}
