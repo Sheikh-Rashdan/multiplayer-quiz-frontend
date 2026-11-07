@@ -68,3 +68,11 @@
 .screenLink {
     text-decoration: none;
 }
+
+.logoutButton {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    outline: 1px solid var(--highlight);
+}
