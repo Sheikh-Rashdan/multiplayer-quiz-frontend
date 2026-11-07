@@ -19,6 +19,7 @@ function ViewQuizScreen() {
     const [refreshKey, setRefreshKey] = useState(0);
 
     const [isCreating, setIsCreating] = useState(false);
+    const [inputValid, setInputValid] = useState(false);
     const questionInputRef = useRef();
     const [optionCount, setOptionCount] = useState(2)
     const [answerIndex, setAnswerIndex] = useState(0);
@@ -49,6 +50,17 @@ function ViewQuizScreen() {
         if (!retrieveQuiz()) return;
     }, [searchParams, refreshKey])
 
+    function checkCreateInputValid() {
+        for (let i = 0; i < optionCount; i++) {
+            if (optionInputs[i] == null || optionInputs[i].length === 0) {
+                setInputValid(false);
+                return;
+            }
+        }
+
+        const newQuestion = questionInputRef.current?.value.trim();
+        setInputValid(newQuestion.length !== 0);
+    }
 
     function verifyAndSetAnswerIndex(newAnswerIndex) {
         if (newAnswerIndex < 0 || newAnswerIndex >= optionCount) {
@@ -66,12 +78,23 @@ function ViewQuizScreen() {
         setOptionCount(newOptionCount);
     }
 
-    useEffect(() => verifyAndSetAnswerIndex(answerIndex), [optionCount]);
+    useEffect(() => {
+        verifyAndSetAnswerIndex(answerIndex);
+
+        const newOptionInputs = {};
+        for (let i = 0; i < optionCount; i++) {
+            newOptionInputs[i] = optionInputs[i];
+        }
+        setOptionInputs(newOptionInputs);
+    }, [optionCount]);
+
+    useEffect(() => checkCreateInputValid(), [optionInputs]);
 
     function setOption(value, index) {
         const newOptionInputs = structuredClone(optionInputs);
         newOptionInputs[index] = value;
         setOptionInputs(newOptionInputs);
+        checkCreateInputValid();
     }
 
     return (
@@ -186,6 +209,7 @@ function ViewQuizScreen() {
                     <div className="overlayCardDivider" />
                     <button
                         className="primaryButton fillWidth"
+                        disabled={!inputValid}
                     >
                         <p>Add</p>
                         <PlusCircle pack="filled" />
