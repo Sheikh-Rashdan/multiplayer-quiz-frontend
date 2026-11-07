@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import "./JoinRoomScreen.css";
 import { getRoom } from "../scripts/api/Room";
+import { AnimatePresence, motion } from "framer-motion";
 import { PlayCircle } from "@boxicons/react";
 
 function JoinRoomScreen() {
   const roomCodeInputRef = useRef();
+  const [validRoom, setValidRoom] = useState();
 
   const [room, setRoom] = useState();
 
   async function checkRoomCode() {
+    setValidRoom(null);
     setRoom(null);
     const roomCodeString = roomCodeInputRef.current.value.trim().toUpperCase();
     if (roomCodeString.length === 5) {
       const room = await getRoom(roomCodeString);
       if (room == null) {
+        setValidRoom(false);
         return;
       }
+      setValidRoom(true);
       setRoom(room);
     }
   }
@@ -32,6 +37,23 @@ function JoinRoomScreen() {
           className="roomCodeInput"
           onChange={checkRoomCode}
         />
+        <AnimatePresence>
+          {validRoom != null &&
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              className="roomInfoContainer"
+            >
+              {validRoom
+                ? (
+                  <>
+                    <p>Room valid</p>
+                  </>
+                )
+                : <p>Invalid Code!</p>}
+            </motion.div>}
+        </AnimatePresence>
         <button
           className="primaryButton fillWidth"
           disabled={room == null || room.status !== "waiting"}
