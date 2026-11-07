@@ -32,8 +32,8 @@ function ViewQuizScreen() {
             navigate("/host");
             return false;
         }
-        setQuiz(await getQuizFromId(backToLogin, authToken, retrievedQuizId));
-        setQuestions(await getQuestionsForQuiz(backToLogin, authToken, retrievedQuizId));
+        setQuiz(await getQuizFromId(retrievedQuizId));
+        setQuestions(await getQuestionsForQuiz(retrievedQuizId));
         return true;
     }
 

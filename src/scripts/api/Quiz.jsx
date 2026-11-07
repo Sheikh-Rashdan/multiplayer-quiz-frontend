@@ -18,16 +18,14 @@ export async function getMyQuizzes(backToLogin, authToken) {
     }
 }
 
-export async function getQuizFromId(backToLogin, authToken, quizId) {
+export async function getQuizFromId(quizId) {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}`,
-            { "headers": { "Authorization": `Bearer ${authToken}` } });
+        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}`);
         const quiz = response.data;
         return quiz;
     } catch (error) {
         if (error instanceof AxiosError) {
             if ([401, 403, 404].includes(error.status)) {
-                backToLogin();
                 return;
             }
         }

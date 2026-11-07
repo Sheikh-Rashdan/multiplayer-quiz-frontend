@@ -1,15 +1,13 @@
 import axios, { AxiosError } from "axios";
 
-export async function getQuestionsForQuiz(backToLogin, authToken, quizId) {
+export async function getQuestionsForQuiz(quizId) {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions`,
-            { "headers": { "Authorization": `Bearer ${authToken}` } });
+        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions`);
         const questions = response.data;
         return questions;
     } catch (error) {
         if (error instanceof AxiosError) {
             if ([401, 403, 404].includes(error.status)) {
-                backToLogin();
                 return;
             }
         }
@@ -18,16 +16,14 @@ export async function getQuestionsForQuiz(backToLogin, authToken, quizId) {
     }
 }
 
-export async function getQuestionFromId(backToLogin, authToken, quizId, questionId) {
+export async function getQuestionFromId(quizId, questionId) {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions/${questionId}`,
-            { "headers": { "Authorization": `Bearer ${authToken}` } });
+        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions/${questionId}`);
         const question = response.data;
         return question;
     } catch (error) {
         if (error instanceof AxiosError) {
             if ([401, 403, 404].includes(error.status)) {
-                backToLogin();
                 return;
             }
         }
