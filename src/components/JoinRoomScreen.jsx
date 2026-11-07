@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./JoinRoomScreen.css";
 import { getRoom } from "../scripts/api/Room";
+import { PlayCircle } from "@boxicons/react";
 
 function JoinRoomScreen() {
   const roomCodeInputRef = useRef();
@@ -31,6 +32,13 @@ function JoinRoomScreen() {
           className="roomCodeInput"
           onChange={checkRoomCode}
         />
+        <button
+          className="primaryButton fillWidth"
+          disabled={room == null || room.status !== "waiting"}
+        >
+          <p>Join</p>
+          <PlayCircle pack="filled" />
+        </button>
       </div>
     </>
   );
