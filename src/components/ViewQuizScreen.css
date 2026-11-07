@@ -105,3 +105,15 @@
 .secondaryCard .primaryButton {
     margin-top: 0.4rem;
 }
+
+.optionContainer {
+    max-height: 12rem;
+    overflow-y: scroll;
+}
+
+.optionCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.1rem;
+}
