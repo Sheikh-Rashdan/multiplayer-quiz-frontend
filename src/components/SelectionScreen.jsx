@@ -1,12 +1,29 @@
-import { Link } from "react-router";
-
-import { HomeAdd, DoorOpenAlt } from "@boxicons/react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Contexts";
+import { useContext } from "react";
+import { HomeAdd, DoorOpenAlt, ArrowOutLeftSquareHalf } from "@boxicons/react";
 import "./SelectionScreen.css";
 import nohootLogo from "../assets/nohoot_2x.png"
 
 function SelectionScreen() {
+    const navigate = useNavigate();
+    const { setAuthToken } = useContext(AuthContext);
+
+    function logOut() {
+        setAuthToken(null);
+        localStorage.removeItem("authToken")
+        navigate("/login");
+    }
+
     return (
         <>
+            <button
+                className="secondaryButton logoutButton"
+                onClick={logOut}
+            >
+                <p>Logout</p>
+                <ArrowOutLeftSquareHalf pack="filled" />
+            </button>
             <div className="parentContainer">
                 <img src={nohootLogo} className="logoImage2x" />
                 <div className="selectionDiv">
