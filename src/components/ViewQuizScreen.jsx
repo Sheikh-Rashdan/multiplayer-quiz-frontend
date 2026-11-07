@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { getQuizFromId, deleteQuizFromId } from "../scripts/api/Quiz";
 import { AuthContext } from "../Contexts";
-import { deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
+import { createQuestion, deleteQuestionFromId, getQuestionsForQuiz } from "../scripts/api/Question";
 import Overlay from "./Overlay";
 import { TrashX, PlusCircle, Play, X, RadioCircle, RadioCircleMarked, MinusCircle } from "@boxicons/react";
 
@@ -44,6 +44,24 @@ function ViewQuizScreen() {
     async function deleteQuiz() {
         await deleteQuizFromId(backToLogin, authToken, quiz.id);
         navigate("/host");
+    }
+
+    async function addNewQuestion() {
+        const newQuestion = questionInputRef.current?.value.trim();
+        if (newQuestion.length === 0) return;
+        if (answerIndex < 0 || answerIndex >= optionCount) return;
+
+        const options = [];
+        for (let i = 0; i < optionCount; i++) {
+            if (optionInputs[i] == null || optionInputs[i].length === 0) return;
+            options.push(optionInputs[i]);
+        }
+
+        await createQuestion(backToLogin, authToken, quiz.id, newQuestion, options, answerIndex);
+
+        setIsCreating(false);
+        setRefreshKey(refreshKey + 1);
+        setOptionCount(2);
     }
 
     useEffect(() => {
@@ -209,6 +227,7 @@ function ViewQuizScreen() {
                     <div className="overlayCardDivider" />
                     <button
                         className="primaryButton fillWidth"
+                        onClick={addNewQuestion}
                         disabled={!inputValid}
                     >
                         <p>Add</p>
