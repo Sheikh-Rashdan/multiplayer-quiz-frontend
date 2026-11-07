@@ -13,9 +13,11 @@ import Overlay from "./Overlay";
 function SelectQuizScreen() {
     const { authToken, backToLogin } = useContext(AuthContext);
     const [quizzes, setQuizzes] = useState([]);
+    const [refreshKey, setRefreshKey] = useState(0);
+
     const [isCreating, setIsCreating] = useState(false);
     const quizNameInputRef = useRef();
-    const [refreshKey, setRefreshKey] = useState(0);
+    const [isCreateInputValid, setIsCreateInputValid] = useState(false);
 
     async function loadQuizzes() {
         const quizzes = await getMyQuizzes(backToLogin, authToken);
@@ -36,6 +38,11 @@ function SelectQuizScreen() {
         getMe(backToLogin, authToken);
         loadQuizzes();
     }, [authToken, refreshKey]);
+
+    function checkCreateInputValid() {
+        const newQuizName = quizNameInputRef.current?.value.trim();
+        setIsCreateInputValid(newQuizName.length > 0);
+    }
 
     return (
         <>
@@ -84,11 +91,13 @@ function SelectQuizScreen() {
                         placeholder="Quiz Name"
                         className="fillWidth"
                         ref={quizNameInputRef}
+                        onChange={checkCreateInputValid}
                     />
 
                     <button
                         className="primaryButton fillWidth"
                         onClick={createNewQuiz}
+                        disabled={!isCreateInputValid}
                     >
                         <p>Create</p>
                         <PlusCircle pack="filled" />
