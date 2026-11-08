@@ -48,4 +48,8 @@
       font-weight: 300;
     }
   }
+
+  .exitButton {
+    margin-top: auto;
+  }
 }

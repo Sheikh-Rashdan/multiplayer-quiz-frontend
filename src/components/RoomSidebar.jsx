@@ -1,8 +1,11 @@
-import { Copy } from "@boxicons/react";
+import { Copy, DoorOpenAlt } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_1x.png";
 import "./RoomSidebar.css";
+import { useNavigate } from "react-router";
 
 function RoomSidebar({ room, hostName, quiz, getPlayer }) {
+
+  const navigate = useNavigate();
 
   const roomId = room?.id;
   const quizName = quiz?.name;
@@ -34,6 +37,13 @@ function RoomSidebar({ room, hostName, quiz, getPlayer }) {
           </div>
         ))}
       </div>
+      <button
+        className="secondaryButton fillWidth exitButton"
+        onClick={() => navigate("/home")}
+      >
+        <p>Exit</p>
+        <DoorOpenAlt pack="filled" />
+      </button>
     </div>
   );
 }
