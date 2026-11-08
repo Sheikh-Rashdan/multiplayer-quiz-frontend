@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
@@ -28,6 +28,10 @@ function OngoingElement({ room, questions, ws }) {
   const [answerIndex, setAnswerIndex] = useState();
   const [lastAnswered, setLastAnswered] = useState();
 
+  useEffect(() => {
+    setAnswerIndex(null);
+  }, [room]);
+
   function confirmAnswer() {
     const answerMessage = {
       "type": "confirm_answer",
@@ -48,7 +52,7 @@ function OngoingElement({ room, questions, ws }) {
             key={index}
             className="optionButton"
             data-selected={index == answerIndex}
-            onClick={() => setAnswerIndex(index)}
+            onClick={() => { if (lastAnswered != room.question_index) setAnswerIndex(index); }}
           >
             {option}
           </button>
