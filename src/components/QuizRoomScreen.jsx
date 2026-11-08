@@ -23,6 +23,7 @@ function QuizRoomScreen() {
   const [players, setPlayers] = useState({});
 
   const [errorMessage, setErrorMessage] = useState();
+  const [answerSuccess, setAnswerSuccess] = useState();
 
   const ws = useRef();
 
@@ -66,7 +67,6 @@ function QuizRoomScreen() {
     }
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data)
-      // console.log(data);
       handleResponse(data);
     }
     websocket.onerror = (error) => console.log(error);
@@ -85,6 +85,8 @@ function QuizRoomScreen() {
       const newRoom = structuredClone(room);
       newRoom.status = data.status;
       setRoom(newRoom);
+    } else if (data.type == "answer_feedback") {
+      setAnswerSuccess(data.answer_feedback);
     }
   }
 
@@ -117,7 +119,7 @@ function QuizRoomScreen() {
         : (
           <div className="quizRoomContainer">
             <RoomSidebar room={room} hostName={hostName} quiz={quiz} getPlayer={getPlayer} />
-            <RoomMain room={room} quizId={quiz?.id} ws={ws} />
+            <RoomMain room={room} quizId={quiz?.id} ws={ws} answerSuccess={answerSuccess} />
           </div>
         )
       }

@@ -4,7 +4,7 @@ import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
 import { ArrowBigRightLine } from "@boxicons/react";
 
-function RoomMain({ room, quizId, ws }) {
+function RoomMain({ room, quizId, ws, answerSuccess }) {
 
   const [questions, setQuestions] = useState();
 
@@ -16,14 +16,14 @@ function RoomMain({ room, quizId, ws }) {
   return (
     <div className="secondaryCard roomMainContainer">
       <WaitingElement room={room} />
-      <OngoingElement room={room} questions={questions} ws={ws} />
+      {room?.status == "ongoing" && questions != null && (
+        <OngoingElement room={room} questions={questions} ws={ws} answerSuccess={answerSuccess} />
+      )}
     </div>
   );
 }
 
-function OngoingElement({ room, questions, ws }) {
-  if (room?.status != "ongoing" || questions == null) return;
-
+function OngoingElement({ room, questions, ws, answerSuccess }) {
   const currentQuestion = questions[room.question_index];
   const [answerIndex, setAnswerIndex] = useState();
   const [lastAnswered, setLastAnswered] = useState();
@@ -52,6 +52,8 @@ function OngoingElement({ room, questions, ws }) {
             key={index}
             className="optionButton"
             data-selected={index == answerIndex}
+            data-can-answer={lastAnswered != room.question_index}
+            data-success={answerSuccess}
             onClick={() => { if (lastAnswered != room.question_index) setAnswerIndex(index); }}
           >
             {option}
