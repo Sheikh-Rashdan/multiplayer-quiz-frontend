@@ -4,7 +4,7 @@ import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
 import { ArrowBigRightLine } from "@boxicons/react";
 
-function RoomMain({ room, quizId }) {
+function RoomMain({ room, quizId, ws }) {
 
   const [questions, setQuestions] = useState();
 
@@ -16,16 +16,27 @@ function RoomMain({ room, quizId }) {
   return (
     <div className="secondaryCard roomMainContainer">
       <WaitingElement room={room} />
-      <OngoingElement room={room} questions={questions} />
+      <OngoingElement room={room} questions={questions} ws={ws} />
     </div>
   );
 }
 
-function OngoingElement({ room, questions }) {
+function OngoingElement({ room, questions, ws }) {
   if (room?.status != "ongoing" || questions == null) return;
 
   const currentQuestion = questions[room.question_index];
   const [answerIndex, setAnswerIndex] = useState();
+  const [lastAnswered, setLastAnswered] = useState();
+
+  function confirmAnswer() {
+    const answerMessage = {
+      "type": "confirm_answer",
+      "question_index": room.question_index,
+      "answer_index": answerIndex
+    };
+    ws.current.send(JSON.stringify(answerMessage))
+    setLastAnswered(room.question_index);
+  }
 
   return (
     <>
@@ -45,7 +56,8 @@ function OngoingElement({ room, questions }) {
       </div>
       <button
         className="primaryButton submitButton"
-        disabled={answerIndex == null}
+        disabled={answerIndex == null || lastAnswered == room.question_index}
+        onClick={confirmAnswer}
       >
         <p>Submit</p>
         <ArrowBigRightLine pack="filled" className="submitIcon" />
