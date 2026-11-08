@@ -17,7 +17,7 @@ function RoomMain({ room, quizId, ws, answerSuccess, getPlayer, isHost }) {
     <div className="secondaryCard roomMainContainer">
       <WaitingElement room={room} isHost={isHost} ws={ws} />
       {room?.status == "ongoing" && questions != null && (
-        <OngoingElement room={room} questions={questions} ws={ws} answerSuccess={answerSuccess} />
+        <OngoingElement room={room} questions={questions} ws={ws} answerSuccess={answerSuccess} isHost={isHost} />
       )}
       <FinishedElement room={room} getPlayer={getPlayer} />
     </div>
@@ -64,7 +64,7 @@ function FinishedElement({ room, getPlayer }) {
   );
 }
 
-function OngoingElement({ room, questions, ws, answerSuccess }) {
+function OngoingElement({ room, questions, ws, answerSuccess, isHost }) {
   const currentQuestion = questions[room.question_index];
   const [answerIndex, setAnswerIndex] = useState();
   const [lastAnswered, setLastAnswered] = useState();
@@ -85,6 +85,13 @@ function OngoingElement({ room, questions, ws, answerSuccess }) {
     setLastAnswered(room.question_index);
   }
 
+  function nextQuestion() {
+    const nextMessage = {
+      "type": "next_question",
+    };
+    ws.current.send(JSON.stringify(nextMessage))
+  }
+
   return (
     <>
       <p className="questionLabel">Q{room.question_index + 1}. {currentQuestion.question}</p>
@@ -95,9 +102,9 @@ function OngoingElement({ room, questions, ws, answerSuccess }) {
             key={index}
             className="optionButton"
             data-selected={index == answerIndex}
-            data-can-answer={lastAnswered != room.question_index}
+            data-can-answer={lastAnswered != room.question_index && !isHost}
             data-success={answerSuccess}
-            onClick={() => { if (lastAnswered != room.question_index) setAnswerIndex(index); }}
+            onClick={() => { if (lastAnswered != room.question_index && !isHost) setAnswerIndex(index); }}
           >
             {option}
           </button>
@@ -106,9 +113,9 @@ function OngoingElement({ room, questions, ws, answerSuccess }) {
       <button
         className="primaryButton submitButton"
         disabled={answerIndex == null || lastAnswered == room.question_index}
-        onClick={confirmAnswer}
+        onClick={isHost ? nextQuestion : confirmAnswer}
       >
-        <p>Submit</p>
+        <p>{isHost ? "Next Question" : "Submit"}</p>
         <ArrowBigRightLine pack="filled" className="submitIcon" />
       </button>
     </>
