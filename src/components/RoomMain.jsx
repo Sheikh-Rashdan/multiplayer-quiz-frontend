@@ -89,7 +89,11 @@ function OngoingElement({ room, questions, ws, answerSuccess, isHost }) {
     const nextMessage = {
       "type": "next_question",
     };
+    const updateMessage = {
+      "type": "update"
+    }
     ws.current.send(JSON.stringify(nextMessage))
+    ws.current.send(JSON.stringify(updateMessage))
   }
 
   return (
@@ -112,7 +116,7 @@ function OngoingElement({ room, questions, ws, answerSuccess, isHost }) {
       </div>
       <button
         className="primaryButton submitButton"
-        disabled={answerIndex == null || lastAnswered == room.question_index}
+        disabled={(answerIndex == null || lastAnswered == room.question_index) && !isHost}
         onClick={isHost ? nextQuestion : confirmAnswer}
       >
         <p>{isHost ? "Next Question" : "Submit"}</p>
