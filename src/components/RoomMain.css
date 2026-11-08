@@ -76,3 +76,58 @@
   background-color: var(--failure);
   box-shadow: 0 6px 0 0 hsl(from var(--failure) h s calc(l*0.5)), 0 0 10px 2px rgba(from var(--failure) r g b / 0.5);
 }
+
+.podiumContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 2rem;
+
+  .podiumPlayerLabel {
+    font-size: 2rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    max-width: 15vw;
+  }
+
+  .podiumPointsLabel {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .podium {
+    width: 15vw;
+    height: 15vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100vw;
+    background-color: currentColor;
+    box-shadow: 0 10px 0 0 hsl(from currentColor h s calc(l*0.5)), 0 0 12px 0 rgba(from currentColor r g b / 0.2);
+
+    p {
+      color: var(--text);
+      font-size: 6rem;
+      font-weight: bold;
+      text-shadow: 0 6px 0 hsl(from var(--text) h s calc(l*0.5));
+    }
+  }
+
+  .gold {
+    color: #d2a621;
+    margin-bottom: 2rem;
+  }
+
+  .silver {
+    color: #9898a4;
+  }
+
+  .bronze {
+    color: #774d46;
+  }
+}
