@@ -40,6 +40,10 @@ function JoinRoomScreen() {
       setQuiz(quiz));
   }, [room]);
 
+  useEffect(() => {
+    localStorage.removeItem("roomId");
+  }, []);
+
   function joinRoom() {
     localStorage.setItem("roomId", room.id);
     navigate("/room")
