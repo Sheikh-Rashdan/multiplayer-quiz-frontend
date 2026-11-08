@@ -1,6 +1,6 @@
 import { Copy } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_1x.png";
-import "./RoomMain.css";
+import "./RoomSidebar.css";
 
 function RoomSidebar({ room, hostName, quiz, getPlayer }) {
 
