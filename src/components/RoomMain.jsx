@@ -33,6 +33,33 @@ function FinishedElement({ room, getPlayer }) {
 
   return (
     <>
+      <p style={{ fontSize: "3rem" }}>Quiz Ended!</p>
+      <div className="podiumContainer">
+        <div>
+          <p className="podiumPlayerLabel">{playerScores.length >= 2 ? getPlayer(playerScores[1][0]) : "None"}</p>
+          <p className="podiumPointsLabel">{playerScores.length >= 2 ? playerScores[1][1] : 0} points</p>
+          <div className="spacer" />
+          <div className="podium silver">
+            <p>2</p>
+          </div>
+        </div>
+        <div>
+          <p className="podiumPlayerLabel">{playerScores.length >= 1 ? getPlayer(playerScores[0][0]) : "None"}</p>
+          <p className="podiumPointsLabel">{playerScores.length >= 1 ? playerScores[0][1] : 0} points</p>
+          <div className="spacer" />
+          <div className="podium gold">
+            <p>1</p>
+          </div>
+        </div>
+        <div>
+          <p className="podiumPlayerLabel">{playerScores.length >= 3 ? getPlayer(playerScores[2][0]) : "None"}</p>
+          <p className="podiumPointsLabel">{playerScores.length >= 3 ? playerScores[2][1] : 0} points</p>
+          <div className="spacer" />
+          <div className="podium bronze">
+            <p>3</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
