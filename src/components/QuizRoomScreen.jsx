@@ -47,7 +47,6 @@ function QuizRoomScreen() {
     if (room == null) return;
     if (hostName == null) getUserFromId(room.host_id).then(host => setHostName(host.username));
     if (quiz == null) getQuizFromId(room.quiz_id).then(quiz => setQuiz(quiz));
-    setAnswerSuccess(null);
   }, [room]);
 
   useEffect(() => {
@@ -93,6 +92,7 @@ function QuizRoomScreen() {
         newRoom.status = data.status;
       } else if (data.type == "next_question") {
         newRoom.question_index = data.question_index;
+        setAnswerSuccess(null);
       }
 
       return newRoom;
