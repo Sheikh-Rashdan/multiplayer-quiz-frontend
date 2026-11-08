@@ -41,6 +41,7 @@ function QuizRoomScreen() {
 
   useEffect(() => {
     if (room == null) return;
+    if (hostName != null || quiz != null) return;
     getUserFromId(room.host_id).then(host => setHostName(host.username));
     getQuizFromId(room.quiz_id).then(quiz => setQuiz(quiz));
   }, [room]);
