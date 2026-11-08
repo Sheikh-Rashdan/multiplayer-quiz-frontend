@@ -50,7 +50,6 @@
 
   font-size: 1.4rem;
 
-  cursor: pointer;
   box-shadow: 0 6px 0 0 hsl(from var(--secondary-dark) h s calc(l*0.5));
 
   transition-property: background-color, transform, outline;
@@ -58,11 +57,22 @@
   transition-timing-function: ease-out;
 }
 
-.optionButton:hover {
+.optionButton:hover[data-can-answer=true] {
+  cursor: pointer;
   transform: scale(1.1);
 }
 
 .optionButton[data-selected=true] {
   background-color: var(--secondary-light);
   box-shadow: 0 6px 0 0 hsl(from var(--secondary-light) h s calc(l*0.5)), 0 0 10px 2px var(--secondary);
+}
+
+.optionButton[data-selected=true][data-success=true] {
+  background-color: var(--success);
+  box-shadow: 0 6px 0 0 hsl(from var(--success) h s calc(l*0.4)), 0 0 10px 2px rgba(from var(--success) r g b / 0.5);
+}
+
+.optionButton[data-selected=true][data-success=false] {
+  background-color: var(--failure);
+  box-shadow: 0 6px 0 0 hsl(from var(--failure) h s calc(l*0.5)), 0 0 10px 2px rgba(from var(--failure) r g b / 0.5);
 }
