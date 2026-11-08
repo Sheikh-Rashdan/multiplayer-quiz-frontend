@@ -6,6 +6,8 @@ import BackButton from "./BackButton";
 import { Sad } from "@boxicons/react";
 import { getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
+import "./QuizRoomScreen.css";
+import RoomSidebar from "./RoomSidebar.jsx"
 
 function QuizRoomScreen() {
   const navigate = useNavigate();
@@ -101,19 +103,19 @@ function QuizRoomScreen() {
 
   return (
     <>
-      {errorMessage != null && (
-        <>
-          <BackButton destination="/join" />
-          <div className="networkFailureContainer">
-            <Sad pack="filled" className="networkFailureIcon" />
-            <p>{errorMessage}</p>
-          </div>
-        </>
-      )}
-      {
-        errorMessage == null && (
-          <div>
-            {room?.id}
+      {errorMessage != null
+        ? (
+          <>
+            <BackButton destination="/join" />
+            <div className="networkFailureContainer">
+              <Sad pack="filled" className="networkFailureIcon" />
+              <p>{errorMessage}</p>
+            </div>
+          </>
+        )
+        : (
+          <div className="quizRoomContainer">
+            <RoomSidebar room={room} hostName={hostName} quiz={quiz} getPlayer={getPlayer} />
           </div>
         )
       }
