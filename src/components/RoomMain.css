@@ -52,7 +52,7 @@
 
   box-shadow: 0 6px 0 0 hsl(from var(--secondary-dark) h s calc(l*0.5));
 
-  transition-property: background-color, transform, outline;
+  transition-property: background-color, transform, outline, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: ease-out;
 }
