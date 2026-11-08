@@ -6,8 +6,11 @@ import { PlayCircle } from "@boxicons/react";
 import { getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import BackButton from "./BackButton";
+import { useNavigate } from "react-router";
 
 function JoinRoomScreen() {
+  const navigate = useNavigate();
+
   const roomCodeInputRef = useRef();
   const [validRoom, setValidRoom] = useState();
 
@@ -36,6 +39,11 @@ function JoinRoomScreen() {
     getQuizFromId(room.quiz_id).then((quiz) =>
       setQuiz(quiz));
   }, [room]);
+
+  function joinRoom() {
+    localStorage.setItem("roomId", room.id);
+    navigate("/room")
+  }
 
   return (
     <>
@@ -81,6 +89,7 @@ function JoinRoomScreen() {
         <button
           className="primaryButton fillWidth"
           disabled={room == null || room.status !== "waiting"}
+          onClick={joinRoom}
         >
           <p>Join</p>
           <PlayCircle pack="filled" />
