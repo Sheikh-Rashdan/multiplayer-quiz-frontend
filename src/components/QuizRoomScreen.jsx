@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { getRoom } from "../scripts/api/Room";
 import BackButton from "./BackButton";
 import { Sad } from "@boxicons/react";
-import { getUserFromId } from "../scripts/api/User";
+import { getMe, getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import "./QuizRoomScreen.css";
 import RoomSidebar from "./RoomSidebar.jsx"
@@ -13,10 +13,12 @@ import RoomMain from "./RoomMain.jsx"
 function QuizRoomScreen() {
   const navigate = useNavigate();
 
-  const { authToken } = useContext(AuthContext);
+  const { authToken, backToLogin } = useContext(AuthContext);
 
   const [roomId, setRoomId] = useState();
   const [room, setRoom] = useState();
+  const [me, setMe] = useState();
+  const [isHost, setIsHost] = useState();
 
   const [hostName, setHostName] = useState();
   const [quiz, setQuiz] = useState();
@@ -37,10 +39,11 @@ function QuizRoomScreen() {
           setRoom(fetchedRoom);
         } else {
           localStorage.removeItem("roomId");
-          navigate("/join");
+          navigate("/home");
         }
       }
     );
+    getMe(backToLogin, authToken).then(me => setMe(me));
   }, [])
 
   useEffect(() => {
@@ -48,6 +51,10 @@ function QuizRoomScreen() {
     if (hostName == null) getUserFromId(room.host_id).then(host => setHostName(host.username));
     if (quiz == null) getQuizFromId(room.quiz_id).then(quiz => setQuiz(quiz));
   }, [room]);
+
+  useEffect(() => {
+    if (isHost == null && (room != null && me != null)) setIsHost(me.id == room.host_id);
+  }, [me, room]);
 
   useEffect(() => {
     if (roomId == null) return;
