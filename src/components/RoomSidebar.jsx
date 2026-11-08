@@ -1,4 +1,6 @@
+import { Copy } from "@boxicons/react";
 import nohootLogo from "../assets/nohoot_1x.png";
+import "./RoomMain.css";
 
 function RoomSidebar({ room, hostName, quiz, getPlayer }) {
 
@@ -10,6 +12,17 @@ function RoomSidebar({ room, hostName, quiz, getPlayer }) {
 
   return (
     <div className="secondaryCard roomSidebarContainer">
+      <img src={nohootLogo} />
+      <div className="spacer" />
+      <div className="spacer" />
+      <div className="roomCodeContainer">
+        <p>{roomId}</p>
+        <Copy
+          pack="filled"
+          className="roomCodeCopyIcon"
+          onClick={() => window.navigator.clipboard.writeText(roomId)}
+        />
+      </div>
     </div>
   );
 }
