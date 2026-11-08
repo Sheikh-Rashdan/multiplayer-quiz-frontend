@@ -135,7 +135,7 @@ function QuizRoomScreen() {
         : (
           <div className="quizRoomContainer">
             <RoomSidebar room={room} hostName={hostName} quiz={quiz} getPlayer={getPlayer} />
-            <RoomMain room={room} quizId={quiz?.id} ws={ws} answerSuccess={answerSuccess} getPlayer={getPlayer} />
+            <RoomMain room={room} quizId={quiz?.id} ws={ws} answerSuccess={answerSuccess} getPlayer={getPlayer} isHost={isHost} />
           </div>
         )
       }

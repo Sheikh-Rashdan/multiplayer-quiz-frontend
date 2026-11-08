@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
-import { ArrowBigRightLine } from "@boxicons/react";
+import { ArrowBigRightLine, PlayCircle } from "@boxicons/react";
 
-function RoomMain({ room, quizId, ws, answerSuccess, getPlayer }) {
+function RoomMain({ room, quizId, ws, answerSuccess, getPlayer, isHost }) {
 
   const [questions, setQuestions] = useState();
 
@@ -15,7 +15,7 @@ function RoomMain({ room, quizId, ws, answerSuccess, getPlayer }) {
 
   return (
     <div className="secondaryCard roomMainContainer">
-      <WaitingElement room={room} />
+      <WaitingElement room={room} isHost={isHost} ws={ws} />
       {room?.status == "ongoing" && questions != null && (
         <OngoingElement room={room} questions={questions} ws={ws} answerSuccess={answerSuccess} />
       )}
@@ -115,8 +115,9 @@ function OngoingElement({ room, questions, ws, answerSuccess }) {
   );
 }
 
-function WaitingElement({ room }) {
-  if (room?.status == "waiting")
+function WaitingElement({ room, isHost, ws }) {
+  if (room?.status != "waiting") return;
+  if (!isHost)
     return (
       <>
         <LoadingSpinner />
@@ -124,6 +125,27 @@ function WaitingElement({ room }) {
         <p style={{ fontSize: "2rem" }}>Waiting for the quiz to start...</p>
       </>
     );
+
+  function startQuiz() {
+    const startMessage = {
+      "type": "start_quiz"
+    };
+    ws.current.send(JSON.stringify(startMessage));
+  }
+
+  return (
+    <>
+      <p style={{ fontSize: "2rem" }}>Waiting for players to join...</p>
+      <button
+        className="primaryButton submitButton"
+        disabled={Object.keys(room?.player_ids ?? {}).length == 0}
+        onClick={startQuiz}
+      >
+        <p>Start</p>
+        <PlayCircle pack="filled" className="submitIcon" />
+      </button>
+    </>
+  );
 }
 
 export default RoomMain;
