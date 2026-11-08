@@ -53,18 +53,36 @@ function QuizRoomScreen() {
     websocket.onopen = () => {
       console.log("CONNECTED!");
       ws.current = websocket;
+      websocket.send(JSON.stringify({ "type": "update" }));
     }
     websocket.onclose = (event) => {
       setErrorMessage(`${event.code} - ${event.reason}`);
       console.log(`DISCONNECTING - ${event.code} ${event.reason}`);
       ws.current = null;
     }
-    websocket.onmessage = (event) => console.log(event.data);
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      console.log(data);
+      handleResponse(data);
+    }
     websocket.onerror = (error) => console.log(error);
 
     return () => websocket.close();
   }, [roomId]);
 
+  function handleResponse(data) {
+    if (data.type === "update") {
+      setRoom(data.room);
+    } else if (["player_left", "player_joined"].includes(data.type)) {
+      const newRoom = structuredClone(room);
+      newRoom.player_ids = data.player_ids;
+      setRoom(newRoom);
+    } else if (["start_quiz", "end_quiz"].includes(data.type)) {
+      const newRoom = structuredClone(room);
+      newRoom.status = data.status;
+      setRoom(newRoom);
+    }
+  }
   return (
     <>
       {errorMessage != null && (
