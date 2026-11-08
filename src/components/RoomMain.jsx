@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
+import { ArrowBigRightLine } from "@boxicons/react";
 
 function RoomMain({ room, quizId }) {
 
@@ -42,6 +43,13 @@ function OngoingElement({ room, questions }) {
           </button>
         ))}
       </div>
+      <button
+        className="primaryButton submitButton"
+        disabled={answerIndex == null}
+      >
+        <p>Submit</p>
+        <ArrowBigRightLine pack="filled" className="submitIcon" />
+      </button>
     </>
   );
 }
