@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { getRoom } from "../scripts/api/Room";
 import BackButton from "./BackButton";
 import { Sad } from "@boxicons/react";
+import { getUserFromId } from "../scripts/api/User";
+import { getQuizFromId } from "../scripts/api/Quiz";
 
 function QuizRoomScreen() {
   const navigate = useNavigate();
@@ -12,6 +14,10 @@ function QuizRoomScreen() {
 
   const [roomId, setRoomId] = useState();
   const [room, setRoom] = useState();
+
+  const [hostName, setHostName] = useState();
+  const [quiz, setQuiz] = useState();
+  const [players, setPlayers] = useState({});
 
   const [errorMessage, setErrorMessage] = useState();
 
@@ -32,6 +38,12 @@ function QuizRoomScreen() {
       }
     );
   }, [])
+
+  useEffect(() => {
+    if (room == null) return;
+    getUserFromId(room.host_id).then(host => setHostName(host.username));
+    getQuizFromId(room.quiz_id).then(quiz => setQuiz(quiz));
+  }, [room]);
 
   useEffect(() => {
     if (roomId == null) return;
