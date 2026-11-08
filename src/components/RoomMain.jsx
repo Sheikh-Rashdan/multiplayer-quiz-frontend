@@ -29,7 +29,9 @@ function OngoingElement({ room, questions, ws, answerSuccess }) {
   const [lastAnswered, setLastAnswered] = useState();
 
   useEffect(() => {
-    setAnswerIndex(null);
+    if (lastAnswered != room.question_index) {
+      setAnswerIndex(null);
+    }
   }, [room]);
 
   function confirmAnswer() {
