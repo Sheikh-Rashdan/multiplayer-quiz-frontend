@@ -79,7 +79,7 @@ function JoinRoomScreen() {
                       <p>Host:</p><p>{hostName ?? "Host Name"}</p>
                     </div>
                     <div className="roomInfoRow">
-                      <p>Players:</p><p>{Object.keys(room?.player_ids).length}</p>
+                      <p>Players:</p><p>{Object.keys(room?.player_ids ?? {}).length}</p>
                     </div>
                     <div className="roomInfoRow">
                       <p>Status:</p><p>{room?.status.toUpperCase()}</p>
