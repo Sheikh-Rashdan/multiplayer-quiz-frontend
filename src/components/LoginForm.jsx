@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
 import { useLocation, useNavigate } from "react-router";
 
-import { Eye, EyeSlash } from "@boxicons/react";
+import { Eye, EyeSlash, Sad } from "@boxicons/react";
 
 import "./LoginForm.css";
 import nohootLogo from "../assets/nohoot_2x.png"
@@ -23,7 +23,10 @@ function LoginForm() {
   const { authToken, setAuthToken, backToLogin } = useContext(AuthContext);
   const { setIsLoading } = useContext(LoadingContext);
 
+  const [networkFailure, setNetworkFailure] = useState(false);
+
   async function validateSession() {
+    setNetworkFailure(false);
     if (authToken == null) {
       if (location.pathname !== "/login") navigate("/login");
       return;
@@ -36,6 +39,9 @@ function LoginForm() {
         navigate("/home");
       }
     } catch (error) {
+      if (error.code == "ERR_NETWORK") {
+        setNetworkFailure(true);
+      }
       console.log(error);
     }
   }
@@ -87,57 +93,65 @@ function LoginForm() {
   return (
     <>
       <img src={nohootLogo} className="logoImage2x fixed" />
-      <div className="primaryCard loginFormCard">
-        <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
-        <div className="spacer" />
+      {networkFailure && (
+        <div className="networkFailureContainer">
+          <Sad pack="filled" className="networkFailureIcon" />
+          <p>Failed to connect to Server!</p>
+        </div>
+      )}
+      {!networkFailure && (
+        <div className="primaryCard loginFormCard">
+          <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
+          <div className="spacer" />
 
-        <input
-          type="text"
-          ref={usernameInputRef}
-          placeholder="Username"
-          className="fillWidth"
-          onChange={checkInputValid}
-        />
-        <div
-          className="passwordInputDiv fillWidth"
-        >
           <input
-            type={showPassword ? "text" : "password"}
-            ref={passwordInputRef}
-            placeholder="Password"
+            type="text"
+            ref={usernameInputRef}
+            placeholder="Username"
             className="fillWidth"
             onChange={checkInputValid}
           />
-          <button className="secondaryButton" onClick={toggleShowPassword}>
-            {
-              showPassword ?
-                <EyeSlash pack="filled" /> :
-                <Eye pack="filled" />
-            }
-          </button>
-        </div>
-        <div className="spacer" />
-
-        <button
-          className="primaryButton fillWidth"
-          onClick={onLogin}
-          disabled={!isInputValid}
-        >
-          {isLogin ? "Login" : "Signup"}
-        </button>
-        <div className="spacer" />
-
-        <p className="subText">
-          {isLogin ? "Don't have an account?" : "Have an account already?"}&nbsp;
-          <span
-            className="clickable subText"
-            style={{ "color": "var(--secondary-light)" }}
-            onClick={toggleIsLogin}
+          <div
+            className="passwordInputDiv fillWidth"
           >
-            {isLogin ? "Sign" : "Log"} in.
-          </span>
-        </p>
-      </div>
+            <input
+              type={showPassword ? "text" : "password"}
+              ref={passwordInputRef}
+              placeholder="Password"
+              className="fillWidth"
+              onChange={checkInputValid}
+            />
+            <button className="secondaryButton" onClick={toggleShowPassword}>
+              {
+                showPassword ?
+                  <EyeSlash pack="filled" /> :
+                  <Eye pack="filled" />
+              }
+            </button>
+          </div>
+          <div className="spacer" />
+
+          <button
+            className="primaryButton fillWidth"
+            onClick={onLogin}
+            disabled={!isInputValid}
+          >
+            {isLogin ? "Login" : "Signup"}
+          </button>
+          <div className="spacer" />
+
+          <p className="subText">
+            {isLogin ? "Don't have an account?" : "Have an account already?"}&nbsp;
+            <span
+              className="clickable subText"
+              style={{ "color": "var(--secondary-light)" }}
+              onClick={toggleIsLogin}
+            >
+              {isLogin ? "Sign" : "Log"} in.
+            </span>
+          </p>
+        </div>
+      )}
 
       <AnimatePresence>
         {errorMessage !== "" && (
