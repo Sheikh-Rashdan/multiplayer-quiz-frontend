@@ -19,7 +19,6 @@ function JoinRoomScreen() {
   const [quiz, setQuiz] = useState();
 
   async function checkRoomCode() {
-    setValidRoom(null);
     setRoom(null);
     const roomCodeString = roomCodeInputRef.current.value.trim().toUpperCase();
     if (roomCodeString.length === 5) {
