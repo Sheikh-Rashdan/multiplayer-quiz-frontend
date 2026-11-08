@@ -8,6 +8,7 @@ import { getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import "./QuizRoomScreen.css";
 import RoomSidebar from "./RoomSidebar.jsx"
+import RoomMain from "./RoomMain.jsx"
 
 function QuizRoomScreen() {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ function QuizRoomScreen() {
     }
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data)
-      console.log(data);
+      // console.log(data);
       handleResponse(data);
     }
     websocket.onerror = (error) => console.log(error);
@@ -116,6 +117,7 @@ function QuizRoomScreen() {
         : (
           <div className="quizRoomContainer">
             <RoomSidebar room={room} hostName={hostName} quiz={quiz} getPlayer={getPlayer} />
+            <RoomMain room={room} quizId={quiz?.id} />
           </div>
         )
       }
