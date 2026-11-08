@@ -3,7 +3,7 @@ import nohootLogo from "../assets/nohoot_1x.png";
 import "./RoomSidebar.css";
 import { useNavigate } from "react-router";
 
-function RoomSidebar({ room, hostName, quiz, getPlayer }) {
+function RoomSidebar({ room, hostName, quiz, getPlayer, me }) {
 
   const navigate = useNavigate();
 
@@ -32,8 +32,8 @@ function RoomSidebar({ room, hostName, quiz, getPlayer }) {
       <div className="playerScoreContainer">
         {playerNames.map((name, index) => (
           <div key={index} className="playerScoreCard">
-            <p>{name}</p>
-            <p>{playerScores[index]}</p>
+            <p data-highlight={me?.username == name}>{name}</p>
+            <p data-highlight={me?.username == name}>{playerScores[index]}</p>
           </div>
         ))}
       </div>

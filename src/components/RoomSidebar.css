@@ -47,6 +47,10 @@
       font-size: 1.3rem;
       font-weight: 300;
     }
+
+    p[data-highlight=true] {
+      color: gold;
+    }
   }
 
   .exitButton {
