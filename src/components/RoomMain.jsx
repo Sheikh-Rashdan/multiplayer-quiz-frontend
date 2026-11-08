@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
+import "./RoomMain.css"
 
 function RoomMain({ room, quizId }) {
 
@@ -23,13 +24,24 @@ function OngoingElement({ room, questions }) {
   if (room?.status != "ongoing" || questions == null) return;
 
   const currentQuestion = questions[room.question_index];
+  const [answerIndex, setAnswerIndex] = useState();
 
   return (
     <>
-      <p>{currentQuestion.question}</p>
-      {currentQuestion.options.map((option, index) => (
-        <p key={index}>{option}</p>
-      ))}
+      <p className="questionLabel">Q{room.question_index + 1}. {currentQuestion.question}</p>
+      <div className="spacer" />
+      <div className="optionsRowContainer">
+        {currentQuestion.options.map((option, index) => (
+          <button
+            key={index}
+            className="optionButton"
+            data-selected={index == answerIndex}
+            onClick={() => setAnswerIndex(index)}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
     </>
   );
 }
