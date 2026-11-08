@@ -77,17 +77,26 @@ function QuizRoomScreen() {
   function handleResponse(data) {
     if (data.type === "update") {
       setRoom(data.room);
-    } else if (["player_left", "player_joined"].includes(data.type)) {
-      const newRoom = structuredClone(room);
-      newRoom.player_ids = data.player_ids;
-      setRoom(newRoom);
-    } else if (["start_quiz", "end_quiz"].includes(data.type)) {
-      const newRoom = structuredClone(room);
-      newRoom.status = data.status;
-      setRoom(newRoom);
+      return;
     } else if (data.type == "answer_feedback") {
       setAnswerSuccess(data.answer_feedback);
+      ws.current.send(JSON.stringify({ "type": "update" }));
+      return;
     }
+
+    setRoom((prevRoom) => {
+      const newRoom = structuredClone(prevRoom);
+
+      if (["player_left", "player_joined"].includes(data.type)) {
+        newRoom.player_ids = data.player_ids;
+      } else if (["start_quiz", "end_quiz"].includes(data.type)) {
+        newRoom.status = data.status;
+      } else if (data.type == "next_question") {
+        newRoom.question_index = data.question_index;
+      }
+
+      return newRoom;
+    });
   }
 
   function getPlayer(player_id) {
