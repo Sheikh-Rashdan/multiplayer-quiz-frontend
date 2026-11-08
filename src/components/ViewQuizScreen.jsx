@@ -8,6 +8,7 @@ import { TrashX, PlusCircle, Play, X, RadioCircle, RadioCircleMarked, MinusCircl
 
 import "./ViewQuizScreen.css";
 import BackButton from "./BackButton";
+import { createRoom } from "../scripts/api/Room";
 
 function ViewQuizScreen() {
     const { authToken, backToLogin } = useContext(AuthContext);
@@ -116,6 +117,12 @@ function ViewQuizScreen() {
         checkCreateInputValid();
     }
 
+    async function hostRoom() {
+        const roomId = await createRoom(backToLogin, authToken, quiz.id);
+        localStorage.setItem("roomId", roomId);
+        navigate("/room");
+    }
+
     return (
         <>
             <BackButton destination="/host" />
@@ -167,6 +174,7 @@ function ViewQuizScreen() {
                 </div>
                 <button
                     className="primaryButton fillWidth"
+                    onClick={hostRoom}
                 >
                     <p>Start Quiz</p>
                     <Play pack="filled" />
