@@ -1,0 +1,46 @@
+.roomMainContainer {
+  overflow-y: scroll;
+  position: relative;
+
+  .questionLabel {
+    font-size: 3rem;
+    font-weight: 500;
+  }
+
+  .optionsRowContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+
+  .optionButton {
+    min-width: 10vw;
+    max-width: 15vw;
+  }
+}
+
+.optionButton {
+  padding: 0.4rem 1rem;
+
+  background-color: var(--secondary-dark);
+  border-radius: 8px;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
+  box-shadow: 0 6px 0 0 hsl(from var(--secondary-dark) h s calc(l*0.5));
+
+  transition-property: background-color, transform, outline;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.optionButton:hover {
+  transform: scale(1.1);
+}
+
+.optionButton[data-selected=true] {
+  background-color: var(--secondary-light);
+  box-shadow: 0 6px 0 0 hsl(from var(--secondary-light) h s calc(l*0.5)), 0 0 10px 2px var(--secondary);
+}
