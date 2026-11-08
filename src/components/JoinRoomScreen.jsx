@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { PlayCircle } from "@boxicons/react";
 import { getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
+import BackButton from "./BackButton";
 
 function JoinRoomScreen() {
   const roomCodeInputRef = useRef();
@@ -38,6 +39,7 @@ function JoinRoomScreen() {
 
   return (
     <>
+      <BackButton destination="/home" />
       <div className="primaryCard" style={{ width: "30vw" }}>
         <p>Enter Room Code</p>
         <input
