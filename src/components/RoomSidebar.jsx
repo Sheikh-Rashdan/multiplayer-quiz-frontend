@@ -23,6 +23,17 @@ function RoomSidebar({ room, hostName, quiz, getPlayer }) {
           onClick={() => window.navigator.clipboard.writeText(roomId)}
         />
       </div>
+      <p style={{ textAlign: "center", fontWeight: "300" }}>{quizName} by {hostName}</p>
+      <div className="spacer" />
+      <p style={{ fontSize: "1.8rem" }}>Players: {playerCount}</p>
+      <div className="playerScoreContainer">
+        {playerNames.map((name, index) => (
+          <div key={index} className="playerScoreCard">
+            <p>{name}</p>
+            <p>{playerScores[index]}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
