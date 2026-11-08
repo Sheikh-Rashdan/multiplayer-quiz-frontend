@@ -1,0 +1,8 @@
+.quizRoomContainer {
+  width: 98vw;
+  height: 95vh;
+
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+}
