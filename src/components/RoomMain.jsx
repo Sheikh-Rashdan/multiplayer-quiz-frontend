@@ -4,7 +4,7 @@ import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
 import { ArrowBigRightLine } from "@boxicons/react";
 
-function RoomMain({ room, quizId, ws, answerSuccess }) {
+function RoomMain({ room, quizId, ws, answerSuccess, getPlayer }) {
 
   const [questions, setQuestions] = useState();
 
@@ -19,7 +19,21 @@ function RoomMain({ room, quizId, ws, answerSuccess }) {
       {room?.status == "ongoing" && questions != null && (
         <OngoingElement room={room} questions={questions} ws={ws} answerSuccess={answerSuccess} />
       )}
+      <FinishedElement room={room} getPlayer={getPlayer} />
     </div>
+  );
+}
+
+function FinishedElement({ room, getPlayer }) {
+  if (room?.status != "finished") return;
+
+  const playerScores = Object.entries(room.player_ids);
+  playerScores.sort(([id1, score1], [id2, score2]) => score2 - score1);
+  playerScores.splice(3);
+
+  return (
+    <>
+    </>
   );
 }
 
