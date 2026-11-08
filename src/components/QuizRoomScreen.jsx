@@ -83,6 +83,21 @@ function QuizRoomScreen() {
       setRoom(newRoom);
     }
   }
+
+  function getPlayer(player_id) {
+    const retrievedPlayer = players[player_id];
+    if (retrievedPlayer) return retrievedPlayer;
+
+    let username;
+    getUserFromId(player_id).then(player => {
+      username = player.username;
+      const newPlayers = structuredClone(players);
+      newPlayers[player_id] = username;
+      setPlayers(newPlayers);
+    });
+    return username;
+  }
+
   return (
     <>
       {errorMessage != null && (
