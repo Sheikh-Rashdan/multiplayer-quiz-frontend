@@ -2,7 +2,7 @@
 
 A React + Vite frontend for a multiplayer quiz application. Users can sign in, manage quizzes, host or join rooms, and play live quiz sessions over WebSockets.
 
-Hosted frontend: https://multiplayer-quiz-frontend.onrender.com/
+Hosted frontend: https://multiplayer-quiz-frontend.onrender.com/ <br />
 Hosted backend: https://multiplayer-quiz-backend.onrender.com/
 
 ## Overview
