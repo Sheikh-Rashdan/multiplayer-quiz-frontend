@@ -145,7 +145,7 @@ function LoginForm() {
                 style={{ "color": "var(--secondary-light)" }}
                 onClick={toggleIsLogin}
               >
-                {isLogin ? "Sign" : "Log"} in.
+                {isLogin ? "Sign up" : "Log in"}.
               </span>
             </p>
           </div>
