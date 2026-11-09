@@ -234,7 +234,6 @@ function ViewQuizScreen() {
                             ))
                         }
                     </div>
-                    <div className="overlayCardDivider" />
                     <button
                         className="primaryButton fillWidth"
                         onClick={addNewQuestion}
