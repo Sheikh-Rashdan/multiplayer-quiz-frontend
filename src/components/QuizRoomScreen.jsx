@@ -125,7 +125,7 @@ function QuizRoomScreen() {
       {errorMessage != null
         ? (
           <>
-            <BackButton destination="/join" />
+            <BackButton destination={isHost ? "/host" : "/join"} />
             <div className="networkFailureContainer">
               <Sad pack="filled" className="networkFailureIcon" />
               <p>{errorMessage}</p>
