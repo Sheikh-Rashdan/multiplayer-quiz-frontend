@@ -7,8 +7,10 @@ import { Sad } from "@boxicons/react";
 import { getMe, getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import "./QuizRoomScreen.css";
-import RoomSidebar from "./RoomSidebar.jsx"
-import RoomMain from "./RoomMain.jsx"
+import RoomSidebar from "./RoomSidebar.jsx";
+import RoomMain from "./RoomMain.jsx";
+import correctAudioPath from "../assets/correct.mp3";
+import incorrectAudioPath from "../assets/incorrect.mp3";
 
 let websocketApiUrl = import.meta.env.VITE_API_URL;
 websocketApiUrl = "wss://" + websocketApiUrl.split("://")[1]
@@ -29,6 +31,9 @@ function QuizRoomScreen() {
 
   const [errorMessage, setErrorMessage] = useState();
   const [answerSuccess, setAnswerSuccess] = useState();
+
+  const correctAudio = new Audio(correctAudioPath);
+  const incorrectAudio = new Audio(incorrectAudioPath);
 
   const ws = useRef();
 
@@ -88,6 +93,7 @@ function QuizRoomScreen() {
       setRoom(data.room);
       return;
     } else if (data.type == "answer_feedback") {
+      (data.answer_feedback ? correctAudio : incorrectAudio).play();
       setAnswerSuccess(data.answer_feedback);
       ws.current.send(JSON.stringify({ "type": "update" }));
       return;
