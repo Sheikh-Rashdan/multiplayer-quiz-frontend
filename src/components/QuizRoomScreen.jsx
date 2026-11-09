@@ -95,14 +95,13 @@ function QuizRoomScreen() {
     } else if (data.type == "answer_feedback") {
       (data.answer_feedback ? correctAudio : incorrectAudio).play();
       setAnswerSuccess(data.answer_feedback);
-      ws.current.send(JSON.stringify({ "type": "update" }));
       return;
     }
 
     setRoom((prevRoom) => {
       const newRoom = structuredClone(prevRoom);
 
-      if (["player_left", "player_joined"].includes(data.type)) {
+      if (["player_left", "player_joined", "score_update"].includes(data.type)) {
         newRoom.player_ids = data.player_ids;
       } else if (["start_quiz", "end_quiz"].includes(data.type)) {
         newRoom.status = data.status;

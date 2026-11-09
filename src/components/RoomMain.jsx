@@ -89,11 +89,7 @@ function OngoingElement({ room, questions, ws, answerSuccess, isHost }) {
     const nextMessage = {
       "type": "next_question",
     };
-    const updateMessage = {
-      "type": "update"
-    }
     ws.current.send(JSON.stringify(nextMessage))
-    ws.current.send(JSON.stringify(updateMessage))
   }
 
   return (
