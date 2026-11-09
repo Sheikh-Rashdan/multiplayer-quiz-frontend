@@ -4,7 +4,7 @@ import { login, signup, getMe } from "../scripts/api/User";
 import { AuthContext, LoadingContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { checkConnection } from "../scripts/api/HealthCheck";
 
 import { Eye, EyeSlash, Sad } from "@boxicons/react";
@@ -13,7 +13,6 @@ import "./LoginForm.css";
 import nohootLogo from "../assets/nohoot_2x.png"
 
 function LoginForm() {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [showPassword, toggleShowPassword] = useToggle(false);
@@ -98,57 +97,64 @@ function LoginForm() {
         </div>
       )}
       {!networkFailure && (
-        <div className="primaryCard loginFormCard">
-          <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
-          <div className="spacer" />
+        <>
+          <div className="primaryCard loginFormCard">
+            <p className="cardTitle">{isLogin ? "Welcome Back" : "Create Account"}</p>
+            <div className="spacer" />
 
-          <input
-            type="text"
-            ref={usernameInputRef}
-            placeholder="Username"
-            className="fillWidth"
-            onChange={checkInputValid}
-          />
-          <div
-            className="passwordInputDiv fillWidth"
-          >
             <input
-              type={showPassword ? "text" : "password"}
-              ref={passwordInputRef}
-              placeholder="Password"
+              type="text"
+              ref={usernameInputRef}
+              placeholder="Username"
               className="fillWidth"
               onChange={checkInputValid}
             />
-            <button className="secondaryButton" onClick={toggleShowPassword}>
-              {
-                showPassword ?
-                  <EyeSlash pack="filled" /> :
-                  <Eye pack="filled" />
-              }
-            </button>
-          </div>
-          <div className="spacer" />
-
-          <button
-            className="primaryButton fillWidth"
-            onClick={onLogin}
-            disabled={!isInputValid}
-          >
-            {isLogin ? "Login" : "Signup"}
-          </button>
-          <div className="spacer" />
-
-          <p className="subText">
-            {isLogin ? "Don't have an account?" : "Have an account already?"}&nbsp;
-            <span
-              className="clickable subText"
-              style={{ "color": "var(--secondary-light)" }}
-              onClick={toggleIsLogin}
+            <div
+              className="passwordInputDiv fillWidth"
             >
-              {isLogin ? "Sign" : "Log"} in.
-            </span>
+              <input
+                type={showPassword ? "text" : "password"}
+                ref={passwordInputRef}
+                placeholder="Password"
+                className="fillWidth"
+                onChange={checkInputValid}
+              />
+              <button className="secondaryButton" onClick={toggleShowPassword}>
+                {
+                  showPassword ?
+                    <EyeSlash pack="filled" /> :
+                    <Eye pack="filled" />
+                }
+              </button>
+            </div>
+            <div className="spacer" />
+
+            <button
+              className="primaryButton fillWidth"
+              onClick={onLogin}
+              disabled={!isInputValid}
+            >
+              {isLogin ? "Login" : "Signup"}
+            </button>
+            <div className="spacer" />
+
+            <p className="subText">
+              {isLogin ? "Don't have an account?" : "Have an account already?"}&nbsp;
+              <span
+                className="clickable subText"
+                style={{ "color": "var(--secondary-light)" }}
+                onClick={toggleIsLogin}
+              >
+                {isLogin ? "Sign" : "Log"} in.
+              </span>
+            </p>
+          </div>
+          <p className="creatorLabel">
+            <a href="https://github.com/Sheikh-Rashdan" target="_blank">
+              Made by <span>Sheikh-Rashdan</span>
+            </a>
           </p>
-        </div>
+        </>
       )}
 
       <AnimatePresence>

@@ -41,6 +41,11 @@ function SelectionScreen() {
                     </Link>
                 </div>
             </div>
+            <p className="creatorLabel">
+                <a href="https://github.com/Sheikh-Rashdan" target="_blank">
+                    Made by <span>Sheikh-Rashdan</span>
+                </a>
+            </p>
         </>
     );
 }

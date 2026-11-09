@@ -81,3 +81,19 @@
     flex-direction: column;
     gap: 5vh;
 }
+
+.creatorLabel {
+    position: fixed;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+
+        span {
+            text-decoration: underline;
+        }
+    }
+}
