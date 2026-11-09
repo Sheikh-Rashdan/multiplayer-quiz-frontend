@@ -5,6 +5,7 @@ import { AuthContext, LoadingContext } from "../Contexts";
 import { AnimatePresence, motion } from "motion/react";
 import { AxiosError } from "axios";
 import { useLocation, useNavigate } from "react-router";
+import { checkConnection } from "../scripts/api/HealthCheck";
 
 import { Eye, EyeSlash, Sad } from "@boxicons/react";
 
@@ -26,11 +27,7 @@ function LoginForm() {
   const [networkFailure, setNetworkFailure] = useState(false);
 
   async function validateSession() {
-    setNetworkFailure(false);
-    if (authToken == null) {
-      if (location.pathname !== "/login") navigate("/login");
-      return;
-    }
+    if (authToken == null) return;
 
     try {
       const user = await getMe(backToLogin, authToken);
@@ -39,9 +36,6 @@ function LoginForm() {
         navigate("/home");
       }
     } catch (error) {
-      if (error.code == "ERR_NETWORK") {
-        setNetworkFailure(true);
-      }
       console.log(error);
     }
   }
@@ -49,6 +43,10 @@ function LoginForm() {
   useEffect(() => {
     validateSession();
   }, [authToken]);
+
+  useEffect(() => {
+    checkConnection(setNetworkFailure);
+  }, []);
 
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
