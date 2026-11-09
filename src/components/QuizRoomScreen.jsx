@@ -121,6 +121,7 @@ function QuizRoomScreen() {
 
     let username;
     getUserFromId(player_id).then(player => {
+      if (!player) return;
       username = player.username;
       const newPlayers = structuredClone(players);
       newPlayers[player_id] = username;
