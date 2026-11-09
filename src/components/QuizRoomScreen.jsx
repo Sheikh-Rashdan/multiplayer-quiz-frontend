@@ -13,7 +13,7 @@ import correctAudioPath from "../assets/correct.mp3";
 import incorrectAudioPath from "../assets/incorrect.mp3";
 
 let websocketApiUrl = import.meta.env.VITE_API_URL;
-websocketApiUrl = "wss://" + websocketApiUrl.split("://")[1]
+websocketApiUrl = `${window.location.protocol == "http:" ? "ws" : "wss"}://` + websocketApiUrl.split("://")[1]
 
 function QuizRoomScreen() {
   const navigate = useNavigate();
