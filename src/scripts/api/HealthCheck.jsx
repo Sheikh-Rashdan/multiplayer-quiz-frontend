@@ -7,6 +7,7 @@ export async function checkConnection(setNetworkFailure) {
   try {
     await axios.get(apiUrl);
     clearTimeout(networkTimeout);
+    setNetworkFailure(false);
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.code == "ERR_NETWORK") {
