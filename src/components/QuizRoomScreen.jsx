@@ -10,6 +10,9 @@ import "./QuizRoomScreen.css";
 import RoomSidebar from "./RoomSidebar.jsx"
 import RoomMain from "./RoomMain.jsx"
 
+let websocketApiUrl = import.meta.env.VITE_API_URL;
+websocketApiUrl = "wss://" + websocketApiUrl.split("://")[1]
+
 function QuizRoomScreen() {
   const navigate = useNavigate();
 
@@ -59,7 +62,7 @@ function QuizRoomScreen() {
   useEffect(() => {
     if (roomId == null) return;
 
-    const websocket = new WebSocket(`ws://127.0.0.1:8000/rooms/${roomId}?token=${authToken}`);
+    const websocket = new WebSocket(`${websocketApiUrl}/rooms/${roomId}?token=${authToken}`);
 
     websocket.onopen = () => {
       console.log("CONNECTED!");
