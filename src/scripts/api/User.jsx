@@ -1,8 +1,10 @@
 import axios, { AxiosError } from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function login(username, password) {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/users/login",
+    const response = await axios.post(`${apiUrl}/users/login`,
       { username, password }
     );
 
@@ -23,7 +25,7 @@ export async function login(username, password) {
 
 export async function signup(username, password) {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/users/signup", { username, password });
+    const response = await axios.post(`${apiUrl}/users/signup`, { username, password });
     if (response.status === 200)
       return login(username, password);
   } catch (error) {
@@ -38,7 +40,7 @@ export async function signup(username, password) {
 
 export async function getMe(backToLogin, authToken) {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/users/me",
+    const response = await axios.get(`${apiUrl}/users/me`,
       { "headers": { "Authorization": `Bearer ${authToken}` } })
     if (response.status === 200) {
       const user = response.data;
@@ -56,7 +58,7 @@ export async function getMe(backToLogin, authToken) {
 
 export async function getUserFromId(user_id) {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/users/${user_id}`);
+    const response = await axios.get(`${apiUrl}/users/${user_id}`);
     const user = response.data;
     return user;
   } catch (error) {

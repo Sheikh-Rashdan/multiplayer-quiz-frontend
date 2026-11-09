@@ -1,8 +1,10 @@
 import axios, { AxiosError } from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function getRoom(roomCode) {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/rooms/${roomCode}`);
+    const response = await axios.get(`${apiUrl}/rooms/${roomCode}`);
     const room = response.data;
     return room;
   } catch (error) {
@@ -18,7 +20,7 @@ export async function getRoom(roomCode) {
 
 export async function createRoom(backToLogin, authToken, quiz_id) {
   try {
-    const response = await axios.post(`http://127.0.0.1:8000/rooms`,
+    const response = await axios.post(`${apiUrl}/rooms`,
       { quiz_id },
       { "headers": { "Authorization": `Bearer ${authToken}` } });
     const room = response.data;

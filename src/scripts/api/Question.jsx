@@ -1,8 +1,10 @@
 import axios, { AxiosError } from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function getQuestionsForQuiz(quizId) {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions`);
+        const response = await axios.get(`${apiUrl}/quizzes/${quizId}/questions`);
         const questions = response.data;
         return questions;
     } catch (error) {
@@ -18,7 +20,7 @@ export async function getQuestionsForQuiz(quizId) {
 
 export async function getQuestionFromId(quizId, questionId) {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/quizzes/${quizId}/questions/${questionId}`);
+        const response = await axios.get(`${apiUrl}/quizzes/${quizId}/questions/${questionId}`);
         const question = response.data;
         return question;
     } catch (error) {
@@ -34,7 +36,7 @@ export async function getQuestionFromId(quizId, questionId) {
 
 export async function deleteQuestionFromId(backToLogin, authToken, quizId, questionId) {
     try {
-        await axios.delete(`http://127.0.0.1:8000/quizzes/${quizId}/questions/${questionId}`,
+        await axios.delete(`${apiUrl}/quizzes/${quizId}/questions/${questionId}`,
             { "headers": { "Authorization": `Bearer ${authToken}` } });
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -50,7 +52,7 @@ export async function deleteQuestionFromId(backToLogin, authToken, quizId, quest
 
 export async function createQuestion(backToLogin, authToken, quizId, question, options, answer_index) {
     try {
-        await axios.post(`http://127.0.0.1:8000/quizzes/${quizId}/questions`,
+        await axios.post(`${apiUrl}/quizzes/${quizId}/questions`,
             { question, options, answer_index },
             { "headers": { "Authorization": `Bearer ${authToken}` } });
     } catch (error) {
