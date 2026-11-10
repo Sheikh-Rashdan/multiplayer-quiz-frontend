@@ -126,7 +126,7 @@ function ViewQuizScreen() {
     return (
         <>
             <BackButton destination="/host" />
-            <div className="secondaryCard">
+            <div className="secondaryCard ViewQuizScreen">
                 <p className="quizName">{quiz?.name}</p>
                 <div className="spacer" />
                 <div className="questionContainer">
@@ -145,7 +145,7 @@ function ViewQuizScreen() {
                                 <button
                                     className="deleteButton"
                                     onClick={() => deleteQuestion(question)}>
-                                    <TrashX pack="filled" />
+                                    <TrashX pack="filled" className="deleteButtonIcon" />
                                 </button>
                             </div>
                         ))
@@ -162,14 +162,14 @@ function ViewQuizScreen() {
                         onClick={deleteQuiz}
                     >
                         <p>Delete Quiz</p>
-                        <TrashX pack="filled" />
+                        <TrashX pack="filled" className="buttonIcon" />
                     </button>
                     <button
                         className="secondaryButton"
                         onClick={() => setIsCreating(true)}
                     >
                         <p>Add New Question</p>
-                        <PlusCircle pack="filled" />
+                        <PlusCircle pack="filled" className="buttonIcon" />
                     </button>
                 </div>
                 <button
