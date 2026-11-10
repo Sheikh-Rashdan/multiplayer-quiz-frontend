@@ -63,6 +63,9 @@ function JoinRoomScreen() {
             placeholder="XXXXX"
             className="roomCodeInput"
             onChange={checkRoomCode}
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck="false"
           />
           <AnimatePresence>
             {validRoom != null &&

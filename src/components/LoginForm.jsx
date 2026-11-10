@@ -108,6 +108,9 @@ function LoginForm() {
               placeholder="Username"
               className="fillWidth"
               onChange={checkInputValid}
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
             />
             <div
               className="passwordInputDiv fillWidth"
@@ -118,6 +121,9 @@ function LoginForm() {
                 placeholder="Password"
                 className="fillWidth"
                 onChange={checkInputValid}
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="false"
               />
               <button className="secondaryButton" onClick={toggleShowPassword}>
                 {

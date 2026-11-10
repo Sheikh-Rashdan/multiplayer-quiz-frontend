@@ -93,6 +93,9 @@ function SelectQuizScreen() {
                         className="fillWidth"
                         ref={quizNameInputRef}
                         onChange={checkCreateInputValid}
+                        autoComplete="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                     />
 
                     <button

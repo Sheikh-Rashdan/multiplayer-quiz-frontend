@@ -197,6 +197,9 @@ function ViewQuizScreen() {
                         placeholder="Question"
                         className="fillWidth"
                         ref={questionInputRef}
+                        autoComplete="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                     />
                     <div className="overlayCardDivider" />
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
@@ -219,6 +222,9 @@ function ViewQuizScreen() {
                                         placeholder={`Option ${index + 1}`}
                                         className="fillWidth"
                                         onChange={(event) => setOption(event.target.value, index)}
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        spellCheck="false"
                                     />
                                     <button
                                         onClick={() => verifyAndSetAnswerIndex(index)}
