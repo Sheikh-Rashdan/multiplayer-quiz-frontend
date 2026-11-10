@@ -2,6 +2,15 @@
   overflow-y: scroll;
   position: relative;
 
+  .waitingLabel {
+    text-align: center;
+    font-size: 2rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
   .questionLabel {
     font-size: 3rem;
     font-weight: 500;

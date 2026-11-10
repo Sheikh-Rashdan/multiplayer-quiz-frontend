@@ -129,7 +129,7 @@ function WaitingElement({ room, isHost, ws }) {
       <>
         <LoadingSpinner />
         <div className="spacer" />
-        <p style={{ fontSize: "2rem" }}>Waiting for the quiz to start...</p>
+        <p className="waitingLabel">Waiting for the quiz to start...</p>
       </>
     );
 
@@ -142,7 +142,7 @@ function WaitingElement({ room, isHost, ws }) {
 
   return (
     <>
-      <p style={{ fontSize: "2rem" }}>Waiting for players to join...</p>
+      <p className="waitingLabel">Waiting for players to join...</p>
       <button
         className="primaryButton submitButton"
         disabled={Object.keys(room?.player_ids ?? {}).length == 0}
