@@ -1,5 +1,11 @@
 .parentContainer.JoinRoomScreen {
   margin-bottom: 2rem;
+
+  .primaryCard {
+    @media screen and (max-width: 768px) {
+      min-width: 75vw;
+    }
+  }
 }
 
 .roomCodeInput {
@@ -23,4 +29,12 @@
   display: flex;
   justify-content: space-between;
   width: 80%;
+
+  p:last-child {
+    text-align: right;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
