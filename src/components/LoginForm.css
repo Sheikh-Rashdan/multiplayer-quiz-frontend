@@ -25,9 +25,20 @@
     .networkFailureIcon {
         width: 3.5rem;
         height: 3.5rem;
+
+        @media screen and (max-width: 768px) {
+            width: 5rem;
+            height: 5rem;
+        }
     }
 
     p {
         font-size: 2rem;
+        padding: 0 3rem;
+        text-align: center;
+
+        @media screen and (max-width: 768px) {
+            font-size: 1.6rem;
+        }
     }
 }
