@@ -16,8 +16,8 @@ function RoomSidebar({ room, hostName, quiz, getPlayer, me }) {
   return (
     <div className="secondaryCard roomSidebarContainer">
       <img src={nohootLogo} />
-      <div className="spacer" />
-      <div className="spacer" />
+      <div className="spacer desktop" />
+      <div className="spacer desktop" />
       <div className="roomCodeContainer">
         <p>{roomId}</p>
         <Copy
@@ -28,7 +28,7 @@ function RoomSidebar({ room, hostName, quiz, getPlayer, me }) {
       </div>
       <p style={{ textAlign: "center", fontWeight: "300" }}>{quizName} by {hostName}</p>
       <div className="spacer" />
-      <p style={{ fontSize: "1.8rem" }}>Players: {playerCount}</p>
+      <p style={{ fontSize: "1.8rem" }} className="desktop">Players: {playerCount}</p>
       <div className="playerScoreContainer">
         {playerNames.map((name, index) => (
           <div key={index} className="playerScoreCard">
