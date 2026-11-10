@@ -66,6 +66,7 @@ function JoinRoomScreen() {
             autoComplete="off"
             autoCorrect="off"
             spellCheck="false"
+            onKeyDown={(event) => event.key == "Enter" && !(room == null || room.status !== "waiting") && joinRoom()}
           />
           <AnimatePresence>
             {validRoom != null &&

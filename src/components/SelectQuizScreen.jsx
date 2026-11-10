@@ -96,6 +96,7 @@ function SelectQuizScreen() {
                         autoComplete="off"
                         autoCorrect="off"
                         spellCheck="false"
+                        onKeyDown={(event) => event.key == "Enter" && isCreateInputValid && createNewQuiz()}
                     />
 
                     <button

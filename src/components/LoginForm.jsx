@@ -25,6 +25,9 @@ function LoginForm() {
 
   const [networkFailure, setNetworkFailure] = useState(false);
 
+  const usernameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
   async function validateSession() {
     if (authToken == null) return;
 
@@ -46,9 +49,6 @@ function LoginForm() {
   useEffect(() => {
     checkConnection(setNetworkFailure);
   }, []);
-
-  const usernameInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
 
   function checkInputValid() {
     const usernameString = usernameInputRef.current?.value.trim() ?? "";
@@ -111,6 +111,7 @@ function LoginForm() {
               autoComplete="off"
               autoCorrect="off"
               spellCheck="false"
+              onKeyDown={(event) => event.key == "Enter" && passwordInputRef.current.focus()}
             />
             <div
               className="passwordInputDiv fillWidth"
@@ -124,6 +125,7 @@ function LoginForm() {
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck="false"
+                onKeyDown={(event) => event.key == "Enter" && isInputValid && onLogin()}
               />
               <button className="secondaryButton" onClick={toggleShowPassword}>
                 {
