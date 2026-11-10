@@ -5,4 +5,11 @@
   display: grid;
   grid-template-columns: 1fr 4.5fr;
   gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+    height: 85vh;
+    grid-template-columns: none;
+    grid-template-rows: 1fr 3fr;
+  }
 }
