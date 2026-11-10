@@ -20,6 +20,7 @@ function JoinRoomScreen() {
 
   async function checkRoomCode() {
     setRoom(null);
+    setValidRoom(null);
     const roomCodeString = roomCodeInputRef.current.value.trim().toUpperCase();
     if (roomCodeString.length === 5) {
       const room = await getRoom(roomCodeString);
