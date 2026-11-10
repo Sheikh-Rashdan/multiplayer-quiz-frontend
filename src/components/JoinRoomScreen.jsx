@@ -7,6 +7,7 @@ import { getUserFromId } from "../scripts/api/User";
 import { getQuizFromId } from "../scripts/api/Quiz";
 import BackButton from "./BackButton";
 import { useNavigate } from "react-router";
+import nohootLogo from "../assets/nohoot_2x.png";
 
 function JoinRoomScreen() {
   const navigate = useNavigate();
@@ -52,52 +53,55 @@ function JoinRoomScreen() {
   return (
     <>
       <BackButton destination="/home" />
-      <div className="primaryCard" style={{ width: "30vw" }}>
-        <p>Enter Room Code</p>
-        <input
-          ref={roomCodeInputRef}
-          type="text"
-          placeholder="XXXXX"
-          className="roomCodeInput"
-          onChange={checkRoomCode}
-        />
-        <AnimatePresence>
-          {validRoom != null &&
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className="roomInfoContainer"
-            >
-              {validRoom
-                ? (
-                  <>
-                    <p>Room Details:</p>
-                    <div className="roomInfoRow">
-                      <p>Quiz:</p><p>{quiz?.name ?? "Quiz Name"}</p>
-                    </div>
-                    <div className="roomInfoRow">
-                      <p>Host:</p><p>{hostName ?? "Host Name"}</p>
-                    </div>
-                    <div className="roomInfoRow">
-                      <p>Players:</p><p>{Object.keys(room?.player_ids ?? {}).length}</p>
-                    </div>
-                    <div className="roomInfoRow">
-                      <p>Status:</p><p>{room?.status.toUpperCase()}</p>
-                    </div>
-                  </>
-                )
-                : <p>Invalid Code!</p>}
-            </motion.div>}
-        </AnimatePresence>
-        <button
-          className="primaryButton fillWidth"
-          disabled={room == null || room.status !== "waiting"}
-          onClick={joinRoom}
-        >
-          <p>Join</p>
-          <PlayCircle pack="filled" />
-        </button>
+      <div className="parentContainer JoinRoomScreen">
+        <img src={nohootLogo} className="logoImage2x" />
+        <div className="primaryCard" style={{ width: "30vw" }}>
+          <p>Enter Room Code</p>
+          <input
+            ref={roomCodeInputRef}
+            type="text"
+            placeholder="XXXXX"
+            className="roomCodeInput"
+            onChange={checkRoomCode}
+          />
+          <AnimatePresence>
+            {validRoom != null &&
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                className="roomInfoContainer"
+              >
+                {validRoom
+                  ? (
+                    <>
+                      <p>Room Details:</p>
+                      <div className="roomInfoRow">
+                        <p>Quiz:</p><p>{quiz?.name ?? "Quiz Name"}</p>
+                      </div>
+                      <div className="roomInfoRow">
+                        <p>Host:</p><p>{hostName ?? "Host Name"}</p>
+                      </div>
+                      <div className="roomInfoRow">
+                        <p>Players:</p><p>{Object.keys(room?.player_ids ?? {}).length}</p>
+                      </div>
+                      <div className="roomInfoRow">
+                        <p>Status:</p><p>{room?.status.toUpperCase()}</p>
+                      </div>
+                    </>
+                  )
+                  : <p>Invalid Code!</p>}
+              </motion.div>}
+          </AnimatePresence>
+          <button
+            className="primaryButton fillWidth"
+            disabled={room == null || room.status !== "waiting"}
+            onClick={joinRoom}
+          >
+            <p>Join</p>
+            <PlayCircle pack="filled" />
+          </button>
+        </div>
       </div>
     </>
   );

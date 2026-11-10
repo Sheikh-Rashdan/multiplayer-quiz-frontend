@@ -1,3 +1,7 @@
+.parentContainer.JoinRoomScreen {
+  margin-bottom: 2rem;
+}
+
 .roomCodeInput {
   font-size: 2rem;
   width: 10rem;
