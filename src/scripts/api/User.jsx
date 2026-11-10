@@ -50,6 +50,7 @@ export async function getMe(backToLogin, authToken) {
     if (error instanceof AxiosError) {
       if (error.response?.status === 401) {
         backToLogin();
+        return;
       }
     }
     throw error;
