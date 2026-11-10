@@ -175,6 +175,7 @@ function ViewQuizScreen() {
                 <button
                     className="primaryButton fillWidth"
                     onClick={hostRoom}
+                    disabled={questions == null || questions.length === 0}
                 >
                     <p>Start Quiz</p>
                     <Play pack="filled" />
