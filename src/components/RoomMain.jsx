@@ -3,6 +3,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import { getQuestionsForQuiz } from "../scripts/api/Question";
 import "./RoomMain.css"
 import { ArrowBigRightLine, PlayCircle } from "@boxicons/react";
+import finishSoundPath from "../assets/finish.wav";
 
 function RoomMain({ room, quizId, ws, answerSuccess, getPlayer, isHost }) {
 
@@ -29,12 +30,12 @@ function FinishedElement({ room, getPlayer }) {
 
   const [playerScores, setPlayerScores] = useState([]);
 
-
   useEffect(() => {
     const newPlayerScores = Object.entries(room.player_ids);
     newPlayerScores.sort(([id1, score1], [id2, score2]) => score2 - score1);
     newPlayerScores.splice(3);
     setPlayerScores(newPlayerScores);
+    (new Audio(finishSoundPath)).play();
   }, []);
 
   return (
