@@ -24,7 +24,7 @@ function SelectionScreen() {
                 <p>Logout</p>
                 <ArrowOutLeftSquareHalf pack="filled" />
             </button>
-            <div className="parentContainer">
+            <div className="parentContainer selectionScreen">
                 <img src={nohootLogo} className="logoImage2x" />
                 <div className="selectionDiv">
                     <Link to="/host" className="screenLink">

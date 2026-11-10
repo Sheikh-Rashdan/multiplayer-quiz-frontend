@@ -1,3 +1,10 @@
+.parentContainer.selectionScreen {
+    @media screen and (max-width: 768px) {
+        margin-top: -2vh;
+        gap: 3vh;
+    }
+}
+
 .selectionDiv {
     display: flex;
     justify-content: center;
@@ -7,6 +14,7 @@
 
     @media screen and (max-width: 768px) {
         flex-direction: column;
+        gap: 3vh;
     }
 }
 
@@ -44,7 +52,7 @@
 
     @media screen and (max-width: 768px) {
         min-width: 75vw;
-        min-height: 25vh;
+        min-height: 20vh;
 
         gap: 1vh;
 
