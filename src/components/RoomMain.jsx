@@ -27,9 +27,15 @@ function RoomMain({ room, quizId, ws, answerSuccess, getPlayer, isHost }) {
 function FinishedElement({ room, getPlayer }) {
   if (room?.status != "finished") return;
 
-  const playerScores = Object.entries(room.player_ids);
-  playerScores.sort(([id1, score1], [id2, score2]) => score2 - score1);
-  playerScores.splice(3);
+  const [playerScores, setPlayerScores] = useState([]);
+
+
+  useEffect(() => {
+    const newPlayerScores = Object.entries(room.player_ids);
+    newPlayerScores.sort(([id1, score1], [id2, score2]) => score2 - score1);
+    newPlayerScores.splice(3);
+    setPlayerScores(newPlayerScores);
+  }, []);
 
   return (
     <>
